@@ -4,7 +4,7 @@ var _ = require("lodash");
 
 var errors = {
   // JSHint options
-  E001: "Bad option: '{a}'.",
+  E001: "Bad {a}option: '{b}'.",
   E002: "Bad option value.",
 
   // JSHint input
@@ -61,7 +61,7 @@ var errors = {
   E043: "Too many errors.",
   E044: null,
   E045: "Invalid for each loop.",
-  E046: "A yield statement shall be within a generator function (with syntax: `function*`)",
+  E046: "Yield expressions may only occur within generator functions.",
   E047: null,
   E048: "{a} declaration not directly within block.",
   E049: "A {a} cannot be named '{b}'.",
@@ -76,7 +76,9 @@ var errors = {
   E058: "Missing semicolon.",
   E059: "Incompatible values for the '{a}' and '{b}' linting options.",
   E060: "Non-callable values cannot be used as the second operand to instanceof.",
-  E061: "Invalid position for 'yield' expression (consider wrapping in parenthesis)."
+  E061: "Invalid position for 'yield' expression (consider wrapping in parenthesis).",
+  E062: "Functions defined outside of strict mode with non-simple parameter lists may not " +
+    "enable strict mode."
 };
 
 var warnings = {
@@ -121,7 +123,7 @@ var warnings = {
   W039: "'{a}' is not allowed.",
   W040: "If a strict mode function is executed using function invocation, " +
     "its 'this' value will be undefined.",
-  W041: "Use '{a}' to compare with '{b}'.",
+  W041: null,
   W042: "Avoid EOL escaping.",
   W043: "Bad escaping of EOL. Use option multistr if needed.",
   W044: "Bad or unnecessary escaping.", /* TODO(caitp): remove W044 */
@@ -207,7 +209,7 @@ var warnings = {
   W121: "Extending prototype of native object: '{a}'.",
   W122: "Invalid typeof value '{a}'",
   W123: "'{a}' is already defined in outer scope.",
-  W124: "A generator function shall contain a yield statement.",
+  W124: "A generator function should contain at least one yield expression.",
   W125: "This line contains non-breaking spaces: http://jshint.com/docs/options/#nonbsp",
   W126: "Unnecessary grouping operator.",
   W127: "Unexpected use of a comma operator.",
@@ -224,7 +226,9 @@ var warnings = {
   W137: "Empty destructuring.",
   W138: "Regular parameters should not come after default parameters.",
   W139: "Function expressions should not be used as the second operand to instanceof.",
-  W140: "Missing comma."
+  W140: "Missing comma.",
+  W141: "'{a}' is a non-standard language feature. Enable it using the '{b}' unstable option.",
+  W142: "Superfluous 'case' clause."
 };
 
 var info = {

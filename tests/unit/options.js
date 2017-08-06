@@ -250,7 +250,7 @@ exports.latedef = function (test) {
     .addError(18, "Inner functions should be listed at the top of the outer function.")
     .test(src, { es3: true, latedef: true });
 
-  TestRun(test)
+  var es2015Errors = TestRun(test)
       .addError(4, "'c' was used before it was defined.")
       .addError(6, "'e' was used before it was defined.")
       .addError(8, "'h' was used before it was defined.")
@@ -259,7 +259,14 @@ exports.latedef = function (test) {
       .addError(20, "'ai' was used before it was defined.")
       .addError(31, "'bi' was used before it was defined.")
       .addError(48, "'ci' was used before it was defined.")
-      .test(esnextSrc, {esnext: true, latedef: true});
+      .addError(75, "'importedName' was used before it was defined.")
+      .addError(76, "'importedModule' was used before it was defined.")
+      .addError(77, "'importedNamespace' was used before it was defined.");
+
+  es2015Errors
+      .test(esnextSrc, {esversion: 2015, latedef: true});
+  es2015Errors
+      .test(esnextSrc, {esversion: 2015, latedef: "nofunc"});
 
   TestRun(test, "shouldn't warn when marking a var as exported")
     .test("var a;", { exported: ["a"], latedef: true });
@@ -679,6 +686,27 @@ exports["missing semicolons not influenced by asi"] = function (test) {
 
   TestRun(test).test(code, { expr: true, asi: true });
 
+  code = "do {} while (false) var a;";
+
+  TestRun(test, "do-while as es5")
+    .addError(1, "Missing semicolon.", { code: "E058" })
+    .test(code);
+
+  TestRun(test, "do-while as es5+moz")
+    .addError(1, "Missing semicolon.", { code: "E058" })
+    .test(code, { moz: true });
+
+  TestRun(test, "do-while as es6")
+    .addError(1, "Missing semicolon.", { code: "W033" })
+    .test(code, { esversion: 6 });
+
+  TestRun(test, "do-while as es6 with asi")
+    .test(code, { esversion: 6, asi: true });
+
+  TestRun(test, "do-while false positive")
+    .addError(1, "Missing semicolon.", { code: "E058" })
+    .test("'do' var x;", { esversion: 6, expr: true });
+
   test.done();
 };
 
@@ -786,6 +814,16 @@ exports.undef = function (test) {
   JSHINT("if (typeof foobar) {}", { undef: true });
 
   test.strictEqual(JSHINT.data().implieds, undefined);
+
+  // See gh-3055 "Labels Break JSHint"
+  TestRun(test, "following labeled block")
+    .addError(4, "'x' is not defined.")
+    .test([
+      "label: {",
+      "  let x;",
+      "}",
+      "void x;"
+    ], { esversion: 6, undef: true });
 
   test.done();
 };
@@ -1414,11 +1452,12 @@ exports.eqnull = function (test) {
   ];
 
   // By default, warn about `== null` comparison
+  /**
+   * This test previously asserted the issuance of warning W041. 
+   * W041 has since been removed, but the test is maintained in 
+   * order to discourage regressions.
+   */
   TestRun(test)
-    .addError(1, "Use '===' to compare with 'null'.")
-    .addError(2, "Use '===' to compare with 'null'.")
-    .addError(3, "Use '!==' to compare with 'null'.")
-    .addError(4, "Use '!==' to compare with 'null'.")
     .test(code, {es3: true});
 
   // But when `eqnull` is true, no questions asked
@@ -1533,8 +1572,12 @@ exports.debug = function (test) {
 exports.eqeqeq = function (test) {
   var src = fs.readFileSync(__dirname + '/fixtures/eqeqeq.js', 'utf8');
 
+  /**
+   * This test previously asserted the issuance of warning W041. 
+   * W041 has since been removed, but the test is maintained in 
+   * order to discourage regressions.
+   */
   TestRun(test)
-    .addError(8, "Use '===' to compare with 'null'.")
     .test(src, {es3: true});
 
   TestRun(test)
@@ -3056,6 +3099,104 @@ singleGroups.arrowFunctions = function (test) {
   test.done();
 };
 
+singleGroups.exponentiation = function (test) {
+  TestRun(test)
+    .addError(1, "Unnecessary grouping operator.")
+    .addError(2, "Unnecessary grouping operator.")
+    .test([
+      "(2) ** 2;",
+      "2 ** (2);",
+    ], { singleGroups: true, expr: true, esversion: 7 });
+
+  TestRun(test, "UpdateExpression")
+    .addError(2, "Unnecessary grouping operator.")
+    .addError(3, "Unnecessary grouping operator.")
+    .addError(4, "Unnecessary grouping operator.")
+    .addError(5, "Unnecessary grouping operator.")
+    .addError(6, "Unnecessary grouping operator.")
+    .addError(7, "Unnecessary grouping operator.")
+    .addError(8, "Unnecessary grouping operator.")
+    .addError(9, "Unnecessary grouping operator.")
+    .test([
+      "var x;",
+      "(++x) ** 2;",
+      "(x++) ** 2;",
+      "(--x) ** 2;",
+      "(x--) ** 2;",
+      "2 ** (++x);",
+      "2 ** (x++);",
+      "2 ** (--x);",
+      "2 ** (x--);"
+    ], { singleGroups: true, expr: true, esversion: 7 });
+
+  TestRun(test, "UnaryExpression")
+    .addError(1, "Variables should not be deleted.")
+    .addError(8, "Variables should not be deleted.")
+    .test([
+      "delete (2 ** 3);",
+      "void (2 ** 3);",
+      "typeof (2 ** 3);",
+      "+(2 ** 3);",
+      "-(2 ** 3);",
+      "~(2 ** 3);",
+      "!(2 ** 3);",
+      "(delete 2) ** 3;",
+      "(void 2) ** 3;",
+      "(typeof 2) ** 3;",
+      "(+2) ** 3;",
+      "(-2) ** 3;",
+      "(~2) ** 3;",
+      "(!2) ** 3;"
+    ], { singleGroups: true, expr: true, esversion: 7 });
+
+  TestRun(test, "MultiplicativeExpression")
+    .addError(2, "Unnecessary grouping operator.")
+    .addError(4, "Unnecessary grouping operator.")
+    .addError(6, "Unnecessary grouping operator.")
+    .addError(8, "Unnecessary grouping operator.")
+    .addError(10, "Unnecessary grouping operator.")
+    .addError(12, "Unnecessary grouping operator.")
+    .test([
+      "(2 * 3) ** 4;",
+      "2 * (3 ** 4);",
+      "2 ** (3 * 4);",
+      "(2 ** 3) * 4;",
+      "(2 / 3) ** 4;",
+      "2 / (3 ** 4);",
+      "2 ** (3 / 4);",
+      "(2 ** 3) / 4;",
+      "(2 % 3) ** 4;",
+      "2 % (3 ** 4);",
+      "2 ** (3 % 4);",
+      "(2 ** 3) % 4;",
+    ], { singleGroups: true, expr: true, esversion: 7 });
+
+  TestRun(test, "AdditiveExpression")
+    .addError(2, "Unnecessary grouping operator.")
+    .addError(4, "Unnecessary grouping operator.")
+    .addError(6, "Unnecessary grouping operator.")
+    .addError(8, "Unnecessary grouping operator.")
+    .test([
+      "(2 + 3) ** 4;",
+      "2 + (3 ** 4);",
+      "2 ** (3 + 4);",
+      "(2 ** 3) + 4;",
+      "(2 - 3) ** 4;",
+      "2 - (3 ** 4);",
+      "2 ** (3 - 4);",
+      "(2 ** 3) - 4;",
+    ], { singleGroups: true, expr: true, esversion: 7 });
+
+  TestRun(test, "Exponentiation")
+    .addError(2, "Unnecessary grouping operator.")
+    .test([
+      "(2 ** 3) ** 4;",
+      "2 ** (3 ** 4);",
+    ], { singleGroups: true, expr: true, esversion: 7 });
+
+  test.done();
+};
+
 singleGroups.objectLiterals = function (test) {
   var code = [
     "({}).method();",
@@ -3065,13 +3206,17 @@ singleGroups.objectLiterals = function (test) {
     // Invalid forms
     "var a = ({}).method();",
     "if (({}).method()) {}",
-    "var b = { a: ({}).method() };"
+    "var b = { a: ({}).method() };",
+    "for (({}); ;) {}",
+    "for (; ;({})) {}"
   ];
 
   TestRun(test, "grouping operator not required")
     .addError(4, "Unnecessary grouping operator.")
     .addError(5, "Unnecessary grouping operator.")
     .addError(6, "Unnecessary grouping operator.")
+    .addError(7, "Unnecessary grouping operator.")
+    .addError(8, "Unnecessary grouping operator.")
     .test(code, { singleGroups: true });
 
   test.done();
@@ -3193,13 +3338,17 @@ singleGroups.destructuringAssign = function (test) {
     "([ x ] = [ 1 ]);",
     // expressions
     "1, ({ x } = { x : 1 });",
-    "1, ([ x ] = [ 1 ]);"
+    "1, ([ x ] = [ 1 ]);",
+    "for (({ x } = { X: 1 }); ;) {}",
+    "for (; ;({ x } = { X: 1 })) {}"
   ];
 
   TestRun(test)
     .addError(2, "Unnecessary grouping operator.")
     .addError(3, "Unnecessary grouping operator.")
     .addError(4, "Unnecessary grouping operator.")
+    .addError(5, "Unnecessary grouping operator.")
+    .addError(6, "Unnecessary grouping operator.")
     .test(code, { esversion: 6, singleGroups: true, expr: true });
 
   test.done();
@@ -3761,7 +3910,9 @@ exports.esversion = function(test) {
     "// jshint esversion: 4",
     "// jshint esversion: 5",
     "// jshint esversion: 6",
-    "// jshint esversion: 2015"
+    "// jshint esversion: 2015",
+    "// jshint esversion: 7",
+    "// jshint esversion: 2016"
   ];
 
   TestRun(test, "Value")
@@ -3804,8 +3955,13 @@ exports.esversion = function(test) {
   TestRun(test, "ES6 syntax as ES6")
     .test(es6code, { esversion: 6 });
 
+
   TestRun(test, "ES6 syntax as ES6 (via option value `2015`)")
     .test(es5code, { esversion: 2015 });
+
+  TestRun(test, "ES6 syntax as ES7")
+    .test(es6code, { esversion: 7 });
+
 
   // Array comprehensions aren't defined in ECMAScript 6,
   // but they can be enabled using the `esnext` option
@@ -3818,6 +3974,11 @@ exports.esversion = function(test) {
     .addError(2, "'array comprehension' is only available in Mozilla JavaScript extensions " +
                  "(use moz option).")
     .test(arrayComprehension, { esversion: 6 });
+
+  TestRun(test, "array comprehensions - esversion: 7")
+    .addError(2, "'array comprehension' is only available in Mozilla JavaScript extensions " +
+                 "(use moz option).")
+    .test(arrayComprehension, { esversion: 7 });
 
   TestRun(test, "array comprehensions - esnext: true")
     .test(arrayComprehension, { esnext: true });
@@ -3938,6 +4099,131 @@ exports.trailingcomma = function (test) {
     .addError(8, "Extra comma. (it breaks older versions of IE)")
     .addError(10, "Extra comma. (it breaks older versions of IE)")
     .test(code, { trailingcomma: true, es3: true });
+
+  test.done();
+};
+
+exports.unstable = function (test) {
+  TestRun(test, "Accepts programmatic configuration.")
+    .test("", { unstable: {} });
+
+  TestRun(test, "Accepts empty in-line directive (single-line comment).")
+    .test("// jshint.unstable");
+
+  TestRun(test, "Rejects empty in-line directive (multi-line comment).")
+    .addError(1, "Bad unstable option: ''.")
+    .test("/* jshint.unstable */");
+
+  TestRun(test, "Rejects non-existent names specified via programmatic configuration.")
+    .addError(0, "Bad unstable option: 'nonExistentOptionName'.")
+    .test("", { unstable: { nonExistentOptionName: true } });
+
+  TestRun(test, "Rejects non-existent names specified via in-line directive (single-line comment).")
+    .addError(1, "Bad unstable option: 'nonExistentOptionName'.")
+    .test("// jshint.unstable nonExistentOptionName: true");
+
+  TestRun(test, "Rejects non-existent names specified via in-line directive (multi-line comment).")
+    .addError(1, "Bad unstable option: 'nonExistentOptionName'.")
+    .test("/* jshint.unstable nonExistentOptionName: true */");
+
+  TestRun(test, "Rejects stable names specified via programmatic configuration.")
+    .addError(0, "Bad unstable option: 'undef'.")
+    .test("", { unstable: { undef: true } });
+
+  TestRun(test, "Rejects stable names specified via in-line directive (single-line comment).")
+    .addError(1, "Bad unstable option: 'undef'.")
+    .test("// jshint.unstable undef: true");
+
+  TestRun(test, "Rejects stable names specified via in-line directive (multi-line comment).")
+    .addError(1, "Bad unstable option: 'undef'.")
+    .test("/* jshint.unstable undef: true */");
+
+  test.done();
+};
+
+exports.leanswitch = function (test) {
+  var code = [
+      "switch (0) {",
+      "  case 0:",
+      "  default:",
+      "    break;",
+      "}"
+    ];
+  TestRun(test, "empty case clause followed by default")
+    .test(code);
+  TestRun(test, "empty case clause followed by default")
+    .addError(2, "Superfluous 'case' clause.")
+    .test(code, { leanswitch: true });
+
+  code = [
+      "switch (0) {",
+      "  case 0:",
+      "  case 1:",
+      "    break;",
+      "}"
+    ];
+  TestRun(test, "empty case clause followed by case")
+    .test(code);
+  TestRun(test, "empty case clause followed by case")
+    .test(code, { leanswitch: true });
+
+  code = [
+      "switch (0) {",
+      "  default:",
+      "  case 0:",
+      "    break;",
+      "}"
+    ];
+  TestRun(test, "empty default clause followed by case")
+    .test(code);
+  TestRun(test, "empty default clause followed by case")
+    .addError(2, "Superfluous 'case' clause.")
+    .test(code, { leanswitch: true });
+
+  code = [
+      "switch (0) {",
+      "  case 0:",
+      "    void 0;",
+      "  default:",
+      "    break;",
+      "}"
+    ];
+  TestRun(test, "non-empty case clause followed by default")
+    .addError(3, "Expected a 'break' statement before 'default'.")
+    .test(code);
+  TestRun(test, "non-empty case clause followed by default")
+    .addError(3, "Expected a 'break' statement before 'default'.")
+    .test(code, { leanswitch: true });
+
+  code = [
+      "switch (0) {",
+      "  case 0:",
+      "    void 0;",
+      "  case 1:",
+      "    break;",
+      "}"
+    ];
+  TestRun(test, "non-empty case clause followed by case")
+    .addError(3, "Expected a 'break' statement before 'case'.")
+    .test(code);
+  TestRun(test, "non-empty case clause followed by case")
+    .addError(3, "Expected a 'break' statement before 'case'.")
+    .test(code, { leanswitch: true });
+
+  code = [
+      "switch (0) {",
+      "  default:",
+      "    void 0;",
+      "  case 0:",
+      "    break;",
+      "}"
+    ];
+  TestRun(test, "non-empty default clause followed by case")
+    .addError(3, "Expected a 'break' statement before 'case'.")
+    .test(code);
+  TestRun(test, "non-empty default clause followed by case")
+    .addError(3, "Expected a 'break' statement before 'case'.")
+    .test(code, { leanswitch: true });
 
   test.done();
 };

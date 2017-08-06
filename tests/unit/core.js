@@ -270,7 +270,6 @@ exports.switchFallThrough = function (test) {
   var src = fs.readFileSync(__dirname + '/fixtures/switchFallThrough.js', 'utf8');
   TestRun(test)
     .addError(3, "Expected a 'break' statement before 'case'.")
-    .addError(18, "Expected a 'break' statement before 'default'.")
     .addError(40, "Unexpected ':'.")
     .test(src);
 
@@ -709,7 +708,7 @@ exports.testForIn = function (test) {
   ];
 
   TestRun(test)
-    .addError(2, "Expected an identifier and instead saw 'i'.")
+    .addError(2, "Bad assignment.")
     .test(src);
 
   src = [
@@ -743,6 +742,35 @@ exports.testForIn = function (test) {
     .addError(4, "Invalid for-in loop left-hand-side: initializer is forbidden.")
     .addError(5, "Invalid for-in loop left-hand-side: initializer is forbidden.")
     .test(src, { esnext: true });
+
+  TestRun(test, "Left-hand side as MemberExpression")
+    .test([
+      "for (x.y in {}) {}",
+      "for (x[z] in {}) {}",
+    ]);
+
+  TestRun(test, "Left-hand side as MemberExpression (invalid)")
+    .addError(1, "Bad assignment.", {character: 10})
+    .addError(2, "Bad assignment.", {character: 13})
+    .test([
+      "for (x+y in {}) {}",
+      "for ((this) in {}) {}"
+    ]);
+
+  TestRun(test, "expression context")
+    .test([
+      "for (0 ? 0 in {} : 0 ; false; false ) {}",
+      "for (x[0 in {}] ; false; false ) {}",
+      "for (x = function() { return 0 in {}; } ; false; false ) {}"
+    ]);
+
+  TestRun(test, "expression context (ES2015 forms)")
+    .test([
+      "for (({ [x in {}]: null }); false; false ) {}",
+      "for (var { prop = 'x' in {} } of [{}]) {}",
+      "for (x = () => { return 0 in {}; } ; false; false ) {}",
+      "for (x = function(x = 0 in {}) {} ; false; false ) {}"
+    ], { esversion: 2015 });
 
   test.done();
 };
@@ -814,8 +842,7 @@ exports.testES6Modules = function (test) {
     [58, "'emGet' has already been declared."],
     [58, "'set' has already been declared."],
     [59, "'_' has already been declared."],
-    [60, "'ember2' has already been declared."],
-    [65, "'newImport' was used before it was declared, which is illegal for 'const' variables."]
+    [60, "'ember2' has already been declared."]
   ];
 
   var testRun = TestRun(test);
@@ -866,6 +893,14 @@ exports.testES6Modules = function (test) {
 
   TestRun(test)
     .test(src2, {});
+
+  // See gh-3055 "Labels Break JSHint"
+  TestRun(test, "following labeled block")
+    .test([
+      "label: {}",
+      "export function afterLabelExported() {}",
+      "import afterLabelImported from 'elsewhere';"
+    ], { esversion: 6 });
 
   test.done();
 };
@@ -1756,6 +1791,14 @@ exports.labelsOutOfScope = function (test) {
     .addError(22, "'bar' is not a statement label.")
     .addError(24, "'baz' is not a statement label.")
     .test(src);
+
+  // See gh-3055 "Labels Break JSHint"
+  TestRun(test, "following labeled block")
+    .addError(2, "'x' is not a statement label.")
+    .test([
+      "x: {}",
+      "break x;"
+    ]);
 
   test.done();
 };

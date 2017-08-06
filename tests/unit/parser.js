@@ -709,11 +709,20 @@ exports.strings = function (test) {
 
 exports.badStrings = function (test) {
   var code = [
-    "var a = '\\uNOTHEX';"
+    "var a = '\\uNOTHEX';",
+    "void '\\u0000';",
+    "void '\\ug000';",
+    "void '\\u0g00';",
+    "void '\\u00g0';",
+    "void '\\u000g';"
   ];
 
   var run = TestRun(test)
-    .addError(1, "Unexpected 'uNOTH'.");
+    .addError(1, "Unexpected 'uNOTH'.")
+    .addError(3, "Unexpected 'ug000'.")
+    .addError(4, "Unexpected 'u0g00'.")
+    .addError(5, "Unexpected 'u00g0'.")
+    .addError(6, "Unexpected 'u000g'.");
   run.test(code, {es3: true});
   run.test(code, {}); // es5
   run.test(code, {esnext: true});
@@ -1039,7 +1048,6 @@ exports["gh-2587"] = function (test) {
   TestRun(test)
     .addError(1, "Expected an identifier and instead saw 'if'.")
     .addError(1, "Unrecoverable syntax error. (100% scanned).")
-    .addError(1, "Use '===' to compare with 'true'.")
     .test([
     "true == if"
   ], {});
@@ -1047,7 +1055,6 @@ exports["gh-2587"] = function (test) {
   TestRun(test)
     .addError(1, "Expected an identifier and instead saw 'if'.")
     .addError(1, "Unrecoverable syntax error. (100% scanned).")
-    .addError(1, "Use '!==' to compare with 'true'.")
     .test([
     "true != if"
   ], {});
@@ -1804,7 +1811,7 @@ exports["destructuring globals as moz"] = function (test) {
     .addError(4,  "'z' is not defined.")
     .addError(11, "['b'] is better written in dot notation.")
     .addError(12, "['b'] is better written in dot notation.")
-    .addError(13, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(13, "'rest operator' is only available in ES6 (use 'esversion: 6').")
     .test(code, {moz: true, unused: true, undef: true});
 
   test.done();
@@ -1874,7 +1881,7 @@ exports["destructuring globals as es5"] = function (test) {
     .addError(12, "['b'] is better written in dot notation.")
     .addError(12, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(13, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(13, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(13, "'rest operator' is only available in ES6 (use 'esversion: 6').")
     .test(code, {unused: true, undef: true}); // es5
 
   test.done();
@@ -1913,7 +1920,7 @@ exports["destructuring globals as legacy JS"] = function (test) {
     .addError(12, "['b'] is better written in dot notation.")
     .addError(12, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(13, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(13, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(13, "'rest operator' is only available in ES6 (use 'esversion: 6').")
     .test(code, {es3: true, unused: true, undef: true});
 
   test.done();
@@ -2096,7 +2103,8 @@ exports["destructuring assignment default values"] = function (test) {
     .addError(11, "It's not necessary to initialize 'u' to 'undefined'.")
     .addError(12, "It's not necessary to initialize 'v' to 'undefined'.")
     .addError(13, "It's not necessary to initialize 'x' to 'undefined'.")
-    .addError(14, "Expected ']' and instead saw '='.")
+    .addError(14, "Expected ',' and instead saw '='.")
+    .addError(14, "Expected an identifier and instead saw '3'.")
     .test(code, { esnext: true });
 
   test.done();
@@ -2972,7 +2980,8 @@ exports["let block and let expression"] = function (test) {
     "{",
     "  let(t=4) print(x, y, z, t);",
     "  print(let(u=4) u,x);",
-    "}"
+    "}",
+    "for (; ; let (x = 1) x) {}"
   ];
 
   TestRun(test)
@@ -2987,13 +2996,16 @@ exports["let block and let expression as esnext"] = function (test) {
     "{",
     "  let(t=4) print(x, y, z, t);",
     "  print(let(u=4) u,x);",
-    "}"
+    "}",
+    "for (; ; let (x = 1) x) {}"
   ];
 
   TestRun(test)
     .addError(1, "'let block' is only available in Mozilla JavaScript extensions (use moz option).")
     .addError(3, "'let block' is only available in Mozilla JavaScript extensions (use moz option).")
     .addError(4, "'let expressions' is only available in Mozilla JavaScript extensions " +
+      "(use moz option).")
+    .addError(6, "'let expressions' is only available in Mozilla JavaScript extensions " +
       "(use moz option).")
     .test(code, {esnext: true, unused: true, undef: true, predef: ["print"]});
   test.done();
@@ -3248,6 +3260,148 @@ exports["destructuring function default values"] = function (test) {
   test.done();
 };
 
+exports["non-simple parameter list strict transition"] = function (test) {
+  var noTransitionNonStrict = [
+    "function f() {}",
+    "function f(x) {}",
+    "var a = x => {};",
+    "function f({ x }) {}",
+    "function f([ x ]) {}",
+    "function f(...x) {}",
+    "function f(x = 0) {}"
+  ];
+
+  TestRun(test, "no transition: ES6 & non-strict mode")
+    .test(noTransitionNonStrict, { esversion: 6 });
+  TestRun(test, "no transition: ES7 & non-strict mode")
+    .test(noTransitionNonStrict, { esversion: 7 });
+
+  var noTransitionStrict = [
+    "'use strict';",
+    "function f() {",
+    "  'use strict';",
+    "}",
+    "function f(x) {",
+    "  'use strict';",
+    "}",
+    "var a = x => {",
+    "  'use strict';",
+    "};",
+    "function f({ x }) {",
+    "  'use strict';",
+    "}",
+    "function f([ x ]) {",
+    "  'use strict';",
+    "}",
+    "function f(...x) {",
+    "  'use strict';",
+    "}",
+    "function f(x = 0) {",
+    "  'use strict';",
+    "}"
+  ];
+
+  TestRun(test, "no transition: ES6 & strict mode")
+    .addError(1, "Use the function form of \"use strict\".")
+    .addError(3, "Unnecessary directive \"use strict\".")
+    .addError(6, "Unnecessary directive \"use strict\".")
+    .addError(9, "Unnecessary directive \"use strict\".")
+    .addError(12, "Unnecessary directive \"use strict\".")
+    .addError(15, "Unnecessary directive \"use strict\".")
+    .addError(18, "Unnecessary directive \"use strict\".")
+    .addError(21, "Unnecessary directive \"use strict\".")
+    .test(noTransitionStrict, { esversion: 6 });
+  TestRun(test, "no transition: ES7 & strict mode")
+    .addError(1, "Use the function form of \"use strict\".")
+    .addError(3, "Unnecessary directive \"use strict\".")
+    .addError(6, "Unnecessary directive \"use strict\".")
+    .addError(9, "Unnecessary directive \"use strict\".")
+    .addError(12, "Unnecessary directive \"use strict\".")
+    .addError(15, "Unnecessary directive \"use strict\".")
+    .addError(18, "Unnecessary directive \"use strict\".")
+    .addError(21, "Unnecessary directive \"use strict\".")
+    .test(noTransitionStrict, { esversion: 7 });
+
+  var directTransition = [
+    "function f() {",
+    "  'use strict';",
+    "}",
+    "function f(x) {",
+    "  'use strict';",
+    "}",
+    "var a = x => {",
+    "  'use strict';",
+    "};",
+    "function f({ x }) {",
+    "  'use strict';",
+    "}",
+    "function f([ x ]) {",
+    "  'use strict';",
+    "}",
+    "function f(...x) {",
+    "  'use strict';",
+    "}",
+    "function f(x = 0) {",
+    "  'use strict';",
+    "}"
+  ];
+
+  TestRun(test, "direct transition: ES6")
+    .test(directTransition, { esversion: 6 });
+
+  TestRun(test, "direct transition: ES7")
+    .addError(11, "Functions defined outside of strict mode with non-simple parameter lists may not enable strict mode.")
+    .addError(14, "Functions defined outside of strict mode with non-simple parameter lists may not enable strict mode.")
+    .addError(17, "Functions defined outside of strict mode with non-simple parameter lists may not enable strict mode.")
+    .addError(20, "Functions defined outside of strict mode with non-simple parameter lists may not enable strict mode.")
+    .test(directTransition, { esversion: 7 });
+
+  var indirectTransition = [
+    "function f() {",
+    "  function g() {",
+    "    'use strict';",
+    "  }",
+    "}",
+    "function f(x) {",
+    "  function g() {",
+    "    'use strict';",
+    "  }",
+    "}",
+    "var a = x => {",
+    "  function g() {",
+    "    'use strict';",
+    "  }",
+    "};",
+    "function f({ x }) {",
+    "  function g() {",
+    "    'use strict';",
+    "  }",
+    "}",
+    "function f([ x ]) {",
+    "  function g() {",
+    "    'use strict';",
+    "  }",
+    "}",
+    "function f(...x) {",
+    "  function g() {",
+    "    'use strict';",
+    "  }",
+    "}",
+    "function f(x = 0) {",
+    "  function g() {",
+    "    'use strict';",
+    "  }",
+    "}",
+  ];
+
+  TestRun(test, "indirect transition: ES6")
+    .test(indirectTransition, { esversion: 6 });
+  TestRun(test, "indirect transition: ES7")
+    .test(indirectTransition, { esversion: 7 });
+
+  test.done();
+};
+
 exports["non var destructuring assignment statement"] = function (test) {
   var codeValid = [
     "let b;",
@@ -3469,7 +3623,7 @@ exports["esnext generator without yield"] = function (test) {
     "  print(g.next());"
   ];
   TestRun(test)
-    .addError(7, "A generator function shall contain a yield statement.")
+    .addError(7, "A generator function should contain at least one yield expression.")
     .test(code, {esnext: true, unused: true, undef: true, predef: ["print"]});
 
   test.done();
@@ -3498,7 +3652,7 @@ exports["esnext generator with yield delegation, gh-1544"] = function(test) {
     .addError(1, "'function*' is only available in ES6 (use 'esversion: 6').")
     .addError(2, "'yield' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(2, "'function*' is only available in ES6 (use 'esversion: 6').")
-    .addError(2, "A generator function shall contain a yield statement.")
+    .addError(2, "A generator function should contain at least one yield expression.")
     .test(code);
 
 
@@ -3544,18 +3698,18 @@ exports["mozilla generator as esnext"] = function (test) {
   ];
   TestRun(test)
     .addError(4,
-     "A yield statement shall be within a generator function (with syntax: `function*`)")
+     "Yield expressions may only occur within generator functions.")
     .test(code, {esnext: true, unused: true, undef: true, predef: ["print", "Iterator"]});
 
   TestRun(test)
     .addError(4,
-     "A yield statement shall be within a generator function (with syntax: `function*`)")
+     "Yield expressions may only occur within generator functions.")
     .test(code, {esnext: true, moz: true});
 
   test.done();
 };
 
-exports["yield statement within try-catch"] = function (test) {
+exports["yield expression within try-catch"] = function (test) {
   // see issue: https://github.com/jshint/jshint/issues/1505
   var code = [
     "function* fib() {",
@@ -3796,8 +3950,7 @@ exports["moz-style array comprehension as esnext"] = function (test) {
     "print('evens:', evens);"
   ];
   TestRun(test)
-    .addError(3, "A yield statement shall be within a generator function (with syntax: " +
-      "`function*`)")
+    .addError(3, "Yield expressions may only occur within generator functions.")
     .addError(6, "Expected 'for' and instead saw 'i'.")
     .addError(6, "'for each' is only available in Mozilla JavaScript extensions (use moz option).")
     .addError(7, "Expected 'for' and instead saw 'i'.")
@@ -3805,8 +3958,7 @@ exports["moz-style array comprehension as esnext"] = function (test) {
     .test(code, {esnext: true, unused: true, undef: true, predef: ["print"]});
 
   TestRun(test)
-    .addError(3, "A yield statement shall be within a generator function (with syntax: " +
-      "`function*`)")
+    .addError(3, "Yield expressions may only occur within generator functions.")
     .test(code, {esnext: true, moz: true});
 
   test.done();
@@ -4295,6 +4447,20 @@ exports["for of as esnext"] = function (test) {
     .addError(18, "Invalid for-of loop left-hand-side: more than one ForBinding.")
     .test(code, {esnext: true, undef: true, predef: ["print"]});
 
+  TestRun(test, "Left-hand side as MemberExpression")
+    .test([
+      "for (x.y of []) {}",
+      "for (x[z] of []) {}",
+    ], {esversion: 2015});
+
+  TestRun(test, "Left-hand side as MemberExpression (invalid)")
+    .addError(1, "Bad assignment.", {character: 10})
+    .addError(2, "Bad assignment.", {character: 13})
+    .test([
+      "for (x+y of {}) {}",
+      "for ((this) of {}) {}"
+    ], {esversion: 2015});
+
   test.done();
 };
 
@@ -4495,7 +4661,7 @@ exports["array destructuring for of as es5"] = function (test) {
 
   TestRun(test, "basic")
     .addError(1, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(1, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(1, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(1, "Creating global 'for' variable. Should be 'for (var i ...'.")
     .addError(1, "Creating global 'for' variable. Should be 'for (var v ...'.")
     .addError(2, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
@@ -4520,16 +4686,16 @@ exports["array destructuring for of as es5"] = function (test) {
   TestRun(test, "errors #1")
     .addError(1, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(1, "Invalid for-of loop left-hand-side: initializer is forbidden.")
-    .addError(1, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(1, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(2, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(2, "Invalid for-of loop left-hand-side: more than one ForBinding.")
-    .addError(2, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(2, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(2, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(2, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(3, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(3, "Invalid for-of loop left-hand-side: initializer is forbidden.")
     .addError(3, "Invalid for-of loop left-hand-side: more than one ForBinding.")
-    .addError(3, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(3, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(3, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(3, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(4, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(4, "Invalid for-of loop left-hand-side: initializer is forbidden.")
     .addError(4, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
@@ -4598,7 +4764,7 @@ exports["array destructuring for of as legacy JS"] = function (test) {
 
   TestRun(test, "basic")
     .addError(1, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(1, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(1, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(1, "Creating global 'for' variable. Should be 'for (var i ...'.")
     .addError(1, "Creating global 'for' variable. Should be 'for (var v ...'.")
     .addError(2, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
@@ -4623,16 +4789,16 @@ exports["array destructuring for of as legacy JS"] = function (test) {
   TestRun(test, "errors #1")
     .addError(1, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(1, "Invalid for-of loop left-hand-side: initializer is forbidden.")
-    .addError(1, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(1, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(2, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(2, "Invalid for-of loop left-hand-side: more than one ForBinding.")
-    .addError(2, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(2, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(2, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(2, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(3, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(3, "Invalid for-of loop left-hand-side: initializer is forbidden.")
     .addError(3, "Invalid for-of loop left-hand-side: more than one ForBinding.")
-    .addError(3, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(3, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(3, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(3, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(4, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(4, "Invalid for-of loop left-hand-side: initializer is forbidden.")
     .addError(4, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
@@ -4769,8 +4935,8 @@ exports["object destructuring for of as es5"] = function (test) {
 
   TestRun(test, "basic")
     .addError(4, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(4, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(4, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(4, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(4, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(4, "Creating global 'for' variable. Should be 'for (var key ...'.")
     .addError(4, "Creating global 'for' variable. Should be 'for (var value ...'.")
     .addError(5, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
@@ -4801,19 +4967,19 @@ exports["object destructuring for of as es5"] = function (test) {
   TestRun(test, "errors #1")
     .addError(4, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(4, "Invalid for-of loop left-hand-side: initializer is forbidden.")
-    .addError(4, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(4, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(4, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(4, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(5, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(5, "Invalid for-of loop left-hand-side: more than one ForBinding.")
-    .addError(5, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(5, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(5, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(5, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(5, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(5, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(6, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(6, "Invalid for-of loop left-hand-side: initializer is forbidden.")
     .addError(6, "Invalid for-of loop left-hand-side: more than one ForBinding.")
-    .addError(6, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(6, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(6, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(6, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(6, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(6, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(7, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(7, "Invalid for-of loop left-hand-side: initializer is forbidden.")
     .addError(7, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
@@ -4898,8 +5064,8 @@ exports["object destructuring for of as legacy JS"] = function (test) {
 
   TestRun(test, "basic")
     .addError(4, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(4, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(4, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(4, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(4, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(4, "Creating global 'for' variable. Should be 'for (var key ...'.")
     .addError(4, "Creating global 'for' variable. Should be 'for (var value ...'.")
     .addError(5, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
@@ -4930,19 +5096,20 @@ exports["object destructuring for of as legacy JS"] = function (test) {
   TestRun(test, "errors #1")
     .addError(4, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(4, "Invalid for-of loop left-hand-side: initializer is forbidden.")
-    .addError(4, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(4, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(4, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(4, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(4, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(5, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(5, "Invalid for-of loop left-hand-side: more than one ForBinding.")
-    .addError(5, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(5, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(5, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(5, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(5, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(5, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(6, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(6, "Invalid for-of loop left-hand-side: initializer is forbidden.")
     .addError(6, "Invalid for-of loop left-hand-side: more than one ForBinding.")
-    .addError(6, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(6, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(6, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(6, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(6, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
+    .addError(6, "'destructuring assignment' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(7, "'for of' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(7, "Invalid for-of loop left-hand-side: initializer is forbidden.")
     .addError(7, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
@@ -5375,6 +5542,7 @@ exports["fat arrows support"] = function (test) {
     .addError(8, "'z' is not defined.");
 
   run.test(code, { undef: true, esnext: true });
+  run.test(code, { undef: true, esversion: 2016 });
 
   run = TestRun(test)
     .addError(1, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
@@ -5425,19 +5593,15 @@ exports["fat arrows support"] = function (test) {
     .addError(16, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
     .addError(17, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(17, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
-    .addError(17, "Bad invocation.")
     .addError(18, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(18, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
     .addError(19, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(19, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
-    .addError(19, "Bad invocation.")
     .addError(20, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(21, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
     .addError(22, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
-    .addError(22, "Bad invocation.")
     .addError(23, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
     .addError(24, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
-    .addError(24, "Bad invocation.")
     .addError(26, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(26, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').");
 
@@ -5720,38 +5884,38 @@ exports["spread & rest operator support"] = function (test) {
     .test(code, {esnext: true});
 
   TestRun(test)
-    .addError(1, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(2, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(3, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(4, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(5, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(7, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(8, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(9, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(10, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(1, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(2, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(3, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(4, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(5, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(7, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(8, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(9, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(10, "'rest operator' is only available in ES6 (use 'esversion: 6').")
     .addError(10, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
-    .addError(11, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(12, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(11, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(12, "'spread operator' is only available in ES6 (use 'esversion: 6').")
     .test(code, {moz: true});
 
   TestRun(test)
-    .addError(1, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(2, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(3, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(4, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(5, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(1, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(2, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(3, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(4, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(5, "'spread operator' is only available in ES6 (use 'esversion: 6').")
     .addError(6, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(7, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
 
-    .addError(7, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(7, "'spread operator' is only available in ES6 (use 'esversion: 6').")
     .addError(8, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(8, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(9, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(8, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(9, "'rest operator' is only available in ES6 (use 'esversion: 6').")
     .addError(10, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(10, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(10, "'rest operator' is only available in ES6 (use 'esversion: 6').")
     .addError(10, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
-    .addError(11, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(12, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(11, "'spread operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(12, "'spread operator' is only available in ES6 (use 'esversion: 6').")
     .test(code);
 
   test.done();
@@ -5804,21 +5968,21 @@ exports["parameter destructuring with rest"] = function (test) {
     .addError(1, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
     .addError(4, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
     .addError(7, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
-    .addError(7, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(1, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(1, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(2, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(2, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(3, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(3, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(4, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(4, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(5, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(5, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(6, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(6, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(8, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
-    .addError(9, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').");
+    .addError(7, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(1, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(1, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(2, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(2, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(3, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(3, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(4, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(4, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(5, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(5, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(6, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(6, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(8, "'rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(9, "'rest operator' is only available in ES6 (use 'esversion: 6').");
 
   run.test(code, {moz: true});
 
@@ -5826,35 +5990,35 @@ exports["parameter destructuring with rest"] = function (test) {
     .addError(1, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
     .addError(1, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(1, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(1, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(1, "'rest operator' is only available in ES6 (use 'esversion: 6').")
 
     .addError(2, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(2, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(2, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(2, "'rest operator' is only available in ES6 (use 'esversion: 6').")
 
     .addError(3, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(3, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(3, "'rest operator' is only available in ES6 (use 'esversion: 6').")
 
     .addError(4, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
     .addError(4, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(4, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(4, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(4, "'rest operator' is only available in ES6 (use 'esversion: 6').")
 
     .addError(5, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
     .addError(5, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(5, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(5, "'rest operator' is only available in ES6 (use 'esversion: 6').")
 
     .addError(6, "'destructuring binding' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(6, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(6, "'rest operator' is only available in ES6 (use 'esversion: 6').")
 
     .addError(7, "'arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').")
     .addError(7, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(7, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(7, "'rest operator' is only available in ES6 (use 'esversion: 6').")
 
     .addError(8, "'let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).")
-    .addError(8, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').")
+    .addError(8, "'rest operator' is only available in ES6 (use 'esversion: 6').")
 
-    .addError(9, "'spread/rest operator' is only available in ES6 (use 'esversion: 6').");
+    .addError(9, "'rest operator' is only available in ES6 (use 'esversion: 6').");
 
 
   run.test(code);
@@ -6920,8 +7084,12 @@ exports.ignoreDirective["should be a good option and only accept start, end or l
 exports.ignoreDirective["should allow the linter to skip blocked-out lines to continue finding errors in the rest of the code"] = function (test) {
   var code = fs.readFileSync(__dirname + "/fixtures/gh826.js", "utf8");
 
+  /**
+   * This test previously asserted the issuance of warning W041. 
+   * W041 has since been removed, but the test is maintained in 
+   * order to discourage regressions.
+   */
   TestRun(test)
-    .addError(34, "Use '===' to compare with '0'.")
     .test(code);
 
   test.done();
@@ -7027,7 +7195,6 @@ exports["should be able to ignore a single line with a trailing comment: // jshi
 exports["regression test for GH-1431"] = function (test) {
   // The code is invalid but it should not crash JSHint.
   TestRun(test)
-    .addError(1, "Use '!==' to compare with 'null'.")
     .addError(1, "Expected ';' and instead saw ')'.")
     .addError(1, "Expected ')' and instead saw ';'.")
     .addError(1, "Expected an identifier and instead saw ';'.")
@@ -7603,9 +7770,9 @@ exports.extraRestOperator = function (test) {
     .addError(1, "Unexpected '...'.")
     .addError(2, "Unexpected '...'.")
     .addError(3, "Unexpected '...'.")
-    .addError(3, "Unexpected ')'.")
+    .addError(3, "Expected an identifier and instead saw ')'.")
     .addError(4, "Unexpected '...'.")
-    .addError(4, "Unexpected ')'.")
+    .addError(4, "Expected an identifier and instead saw ')'.")
     .addError(5, "Unexpected '...'.")
     .addError(6, "Unexpected '...'.")
     .addError(7, "Unexpected '...'.")
@@ -7641,17 +7808,68 @@ exports.restOperatorWithoutIdentifier = function (test) {
   ];
 
   TestRun(test)
-    .addError(1, "Unexpected ']'.")
-    .addError(2, "Unexpected ']'.")
-    .addError(3, "Unexpected ')'.")
-    .addError(4, "Unexpected ')'.")
-    .addError(5, "Unexpected ']'.")
-    .addError(6, "Unexpected ']'.")
-    .addError(7, "Unexpected ')'.")
-    .addError(8, "Unexpected ')'.")
-    .addError(9, "Unexpected ']'.")
-    .addError(10, "Unexpected ']'.")
+    .addError(1, "Expected an identifier and instead saw ']'.")
+    .addError(1, "Expected ',' and instead saw ')'.")
+    .addError(1, "Empty destructuring.")
+    .addError(2, "Expected ',' and instead saw 'function'.")
+    .addError(2, "Expected ',' and instead saw '('.")
+    .addError(2, "Expected an identifier and instead saw ']'.")
+    .addError(2, "Expected ',' and instead saw ')'.")
+    .addError(2, "Empty destructuring.")
+    .addError(3, "Expected ',' and instead saw 'function'.")
+    .addError(3, "Expected ',' and instead saw '('.")
+    .addError(3, "Expected an identifier and instead saw ')'.")
+    .addError(3, "Expected ',' and instead saw '{'.")
+    .addError(3, "Expected an identifier and instead saw '}'.")
+    .addError(4, "Expected ',' and instead saw 'function'.")
+    .addError(4, "Expected ',' and instead saw '('.")
+    .addError(4, "Expected an identifier and instead saw ')'.")
+    .addError(4, "Expected ',' and instead saw '{'.")
+    .addError(4, "Expected an identifier and instead saw '}'.")
+    .addError(5, "Expected ',' and instead saw 'var'.")
+    .addError(5, "Expected an identifier and instead saw ']'.")
+    .addError(5, "Expected ',' and instead saw '='.")
+    .addError(5, "Expected an identifier and instead saw '1'.")
+    .addError(5, "Expected an identifier and instead saw '2'.")
+    .addError(5, "Expected an identifier and instead saw '3'.")
+    .addError(5, "Expected ',' and instead saw ';'.")
+    .addError(6, "Expected an identifier and instead saw 'var' (a reserved word).")
+    .addError(6, "Expected ',' and instead saw '['.")
+    .addError(6, "Expected an identifier and instead saw ']'.")
+    .addError(6, "Expected ',' and instead saw '='.")
+    .addError(6, "Expected an identifier and instead saw '1'.")
+    .addError(6, "Expected an identifier and instead saw '2'.")
+    .addError(6, "Expected an identifier and instead saw '3'.")
+    .addError(6, "Expected ',' and instead saw ';'.")
+    .addError(7, "Expected an identifier and instead saw 'var' (a reserved word).")
+    .addError(7, "Expected ',' and instead saw 'arrow'.")
+    .addError(7, "Expected an identifier and instead saw '='.")
+    .addError(7, "Expected ',' and instead saw '('.")
+    .addError(7, "Expected an identifier and instead saw ')'.")
+    .addError(7, "Expected ',' and instead saw '=>'.")
+    .addError(7, "Expected an identifier and instead saw 'void' (a reserved word).")
+    .addError(7, "Expected ',' and instead saw '0'.")
+    .addError(7, "Expected an identifier and instead saw ';'.")
+    .addError(7, "Expected ',' and instead saw ';'.")
+    .addError(8, "Expected an identifier and instead saw 'var' (a reserved word).")
+    .addError(8, "Expected ',' and instead saw 'arrow2'.")
+    .addError(8, "Expected an identifier and instead saw '='.")
+    .addError(8, "Expected ',' and instead saw '('.")
+    .addError(8, "Expected an identifier and instead saw ')'.")
+    .addError(8, "Expected ',' and instead saw '=>'.")
+    .addError(8, "Expected ',' and instead saw ';'.")
+    .addError(8, "Too many errors. (44% scanned).")
     .test(code, { esnext: true });
+
+  test.done();
+};
+
+exports.invalidSpread = function (test) {
+  TestRun(test)
+    .addError(1, "Expected an identifier and instead saw '...'.")
+    .addError(1, "Missing semicolon.")
+    .addError(1, "Expected an assignment or function call and instead saw an expression.")
+    .test('void ...x;', { esversion: 6 });
 
   test.done();
 };
@@ -7745,6 +7963,7 @@ exports["new.target"] = function (test) {
     .test(code);
 
   TestRun(test, "only in ES6").test(code, { esnext: true });
+  TestRun(test, "ES7").test(code, { esversion: 7 });
 
   var code2 = [
     "var a = new.target;",
@@ -7775,6 +7994,12 @@ exports["new.target"] = function (test) {
     .addError(4, "'new.target' must be in function scope.")
     .addError(6, "'new.target' must be in function scope.")
     .test(code2, { esnext: true });
+
+  TestRun(test, "must be in function scope")
+    .addError(1, "'new.target' must be in function scope.")
+    .addError(4, "'new.target' must be in function scope.")
+    .addError(6, "'new.target' must be in function scope.")
+    .test(code2, { esversion: 2016 });
 
   var code3 = [
     "var x = new.meta;"
@@ -7847,25 +8072,14 @@ exports.parsingCommas = function (test) {
   var src = fs.readFileSync(__dirname + '/fixtures/parsingCommas.js', 'utf8');
 
   TestRun(test)
-    .addError(2, "Unexpected ','.")
-    .addError(2, "Comma warnings can be turned off with 'laxcomma'.")
-    .addError(1, "Misleading line break before ','; readers may interpret this as an expression boundary.")
-    .addError(2, "Expected an identifier and instead saw ';'.")
-    .addError(2, "Expected an identifier and instead saw ')'.")
-    .addError(2, "Expected ';' and instead saw '{'.")
-    .addError(2, "Expected an identifier and instead saw '}'.")
-    .addError(5, "Expected ')' to match '(' from line 1 and instead saw 'for'.")
-    .addError(5, "Expected an identifier and instead saw ';'.")
-    .addError(5, "Expected ')' to match '(' from line 5 and instead saw ';'.")
-    .addError(5, "Expected an assignment or function call and instead saw an expression.")
-    .addError(5, "Missing semicolon.")
+    .addError(2, "Expected an identifier and instead saw ','.")
     .addError(6, "Unexpected ','.")
-    .addError(5, "Expected an assignment or function call and instead saw an expression.")
-    .addError(5, "Missing semicolon.")
-    .addError(6, "Expected an identifier and instead saw ','.")
-    .addError(6, "Expected an assignment or function call and instead saw an expression.")
-    .addError(6, "Missing semicolon.")
+    .addError(6, "Comma warnings can be turned off with 'laxcomma'.")
+    .addError(5, "Misleading line break before ','; readers may interpret this as an expression boundary.")
+    .addError(6, "Unexpected ')'.")
     .addError(6, "Expected an identifier and instead saw ')'.")
+    .addError(6, "Expected ')' to match '(' from line 5 and instead saw '{'.")
+    .addError(6, "Expected an identifier and instead saw '}'.")
     .addError(6, "Expected an assignment or function call and instead saw an expression.")
     .addError(6, "Missing semicolon.")
     .test(src);
@@ -7956,6 +8170,236 @@ exports.forInExpr = function (test) {
       "for (var x in [], []) {}",
       "for (var x of {}, {}) {}"
     ], { esversion: 6 });
+
+  test.done();
+};
+
+exports.octalEscape = function (test) {
+  TestRun(test)
+    .addError(3, "Octal literals are not allowed in strict mode.")
+    .addError(4, "Octal literals are not allowed in strict mode.")
+    .addError(5, "Octal literals are not allowed in strict mode.")
+    .addError(6, "Octal literals are not allowed in strict mode.")
+    .addError(7, "Octal literals are not allowed in strict mode.")
+    .addError(8, "Octal literals are not allowed in strict mode.")
+    .addError(9, "Octal literals are not allowed in strict mode.")
+    .test([
+      "'use strict';",
+      "void '\\0';",
+      "void '\\1';",
+      "void '\\2';",
+      "void '\\3';",
+      "void '\\4';",
+      "void '\\5';",
+      "void '\\6';",
+      "void '\\7';",
+      "void '\\8';",
+      "void '\\9';"
+    ], { strict: "global" });
+
+  TestRun(test)
+    .test([
+      "void '\\0';",
+      "void '\\1';",
+      "void '\\2';",
+      "void '\\3';",
+      "void '\\4';",
+      "void '\\5';",
+      "void '\\6';",
+      "void '\\7';",
+      "void '\\8';",
+      "void '\\9';"
+    ]);
+
+  test.done();
+};
+
+// See gh-3004, "Starting jsdoc comment causes 'Unclosed regular expression'
+// error"
+exports.lookaheadBeyondEnd = function (test) {
+  TestRun(test)
+    .addError(1, "Unmatched '{'.")
+    .addError(1, "Unrecoverable syntax error. (100% scanned).")
+    .test("({ a: {");
+
+  test.done();
+};
+
+exports.exponentiation = {};
+
+exports.exponentiation.esversion = function (test) {
+  var src = "x = 2 ** 3;";
+
+  TestRun(test)
+    .addError(1, "'Exponentiation operator' is only available in ES7 (use 'esversion: 7').")
+    .test(src);
+
+  TestRun(test)
+    .addError(1, "'Exponentiation operator' is only available in ES7 (use 'esversion: 7').")
+    .test(src, { esversion: 6 });
+
+  TestRun(test)
+    .test(src, { esversion: 7 });
+
+  test.done();
+};
+
+exports.exponentiation.whitespace = function (test) {
+  TestRun(test)
+    .test([
+      "2 ** 3;",
+      "2** 3;",
+      "2 **3;",
+    ], { expr: true, esversion: 7 });
+
+  TestRun(test, "newlines")
+    .addError(2, "Misleading line break before '**'; readers may interpret this as an expression boundary.")
+    .test([
+      "2",
+      "** 3;",
+      "2 **",
+      "3;"
+    ], { expr: true, esversion: 7 });
+
+  TestRun(test, "invalid")
+    .addError(1, "Expected an identifier and instead saw '*'.")
+    .addError(1, "Missing semicolon.")
+    .test([
+      "2 * * 3;"
+    ], { expr: true, esversion: 7 });
+
+  test.done();
+};
+
+exports.exponentiation.leftPrecedence = function (test) {
+  TestRun(test, "UpdateExpressions")
+    .test([
+      "++x ** y;",
+      "--x ** y;",
+      "x++ ** y;",
+      "x-- ** y;",
+    ], { expr: true, esversion: 7 });
+
+  TestRun(test, "UnaryExpressions")
+    .addError(1, "Variables should not be deleted.")
+    .addError(1, "Unexpected '**'.")
+    .addError(2, "Unexpected '**'.")
+    .addError(3, "Unexpected '**'.")
+    .addError(4, "Unexpected '**'.")
+    .addError(5, "Unexpected '**'.")
+    .addError(6, "Unexpected '**'.")
+    .addError(7, "Unexpected '**'.")
+    .test([
+      "delete 2 ** 3;",
+      "void 2 ** 3;",
+      "typeof 2 ** 3;",
+      "+2 ** 3;",
+      "-2 ** 3;",
+      "~2 ** 3;",
+      "!2 ** 3;"
+    ], { expr: true, esversion: 7 });
+
+  TestRun(test, "Grouping")
+    .addError(1, "Variables should not be deleted.")
+    .test([
+      "(delete 2) ** 3;",
+      "(void 2) ** 3;",
+      "(typeof 2) ** 3;",
+      "(+2) ** 3;",
+      "(-2) ** 3;",
+      "(~2) ** 3;",
+      "(!2) ** 3;"
+    ], { expr: true, esversion: 7 });
+
+  test.done();
+};
+
+exports.exponentiation.rightPrecedence = function (test) {
+  TestRun(test, "ExponentiationExpression")
+    .test([
+      "x ** x ** y;",
+      "x ** ++x ** y;",
+      "x ** --x ** y;",
+      "x ** x++ ** y;",
+      "x ** x-- ** y;"
+    ], { expr: true, esversion: 7 });
+
+  TestRun(test, "UnaryExpression")
+    .test([
+      "x ** delete x.y;",
+      "x ** void y;",
+      "x ** typeof y;",
+      "x ** +y;",
+      "x ** -y;",
+      "x ** ~y;",
+      "x ** !y;"
+    ], { expr: true, esversion: 7 });
+
+  test.done();
+};
+
+exports.exponentiation.compundAssignment = function (test) {
+  var src = [
+      "x **= x;",
+      "x**=x;",
+      "x **= -2;",
+      "x **= 2 ** 4;"
+    ];
+
+  TestRun(test, "valid (esversion: 6)")
+    .addError(1, "'Exponentiation operator' is only available in ES7 (use 'esversion: 7').")
+    .addError(2, "'Exponentiation operator' is only available in ES7 (use 'esversion: 7').")
+    .addError(3, "'Exponentiation operator' is only available in ES7 (use 'esversion: 7').")
+    .addError(4, "'Exponentiation operator' is only available in ES7 (use 'esversion: 7').")
+    .test(src, { esversion: 5 });
+
+  TestRun(test, "valid (esversion: 6)")
+    .addError(1, "'Exponentiation operator' is only available in ES7 (use 'esversion: 7').")
+    .addError(2, "'Exponentiation operator' is only available in ES7 (use 'esversion: 7').")
+    .addError(3, "'Exponentiation operator' is only available in ES7 (use 'esversion: 7').")
+    .addError(4, "'Exponentiation operator' is only available in ES7 (use 'esversion: 7').")
+    .test(src, { esversion: 6 });
+
+  TestRun(test, "valid (esversion: 7)")
+    .test(src, { esversion: 7 });
+
+  TestRun(test, "invalid syntax - whitespace 1")
+    .addError(1, "Expected an identifier and instead saw '*='.")
+    .addError(1, "Expected an assignment or function call and instead saw an expression.")
+    .addError(1, "Missing semicolon.")
+    .test("x * *= x;", { esversion: 7 });
+
+  TestRun(test, "invalid syntax - whitespace 2")
+    .addError(1, "Expected an identifier and instead saw '*='.")
+    .addError(1, "Expected an assignment or function call and instead saw an expression.")
+    .addError(1, "Missing semicolon.")
+    .test("x * *= x;", { esversion: 7 });
+
+  TestRun(test, "invalid syntax - newline 1")
+    .addError(2, "Expected an identifier and instead saw '*='.")
+    .addError(2, "Expected an assignment or function call and instead saw an expression.")
+    .addError(2, "Missing semicolon.")
+    .test([
+      "x *",
+      "*= x;"
+    ], { esversion: 7 });
+
+  TestRun(test, "invalid syntax - newline 2")
+    .addError(2, "Expected an identifier and instead saw '='.")
+    .addError(2, "Expected an assignment or function call and instead saw an expression.")
+    .addError(2, "Missing semicolon.")
+    .test([
+      "x **",
+      "= x;"
+    ], { esversion: 7 });
+
+  TestRun(test, 'invalid assignment target')
+    .addError(1, "Bad assignment.")
+    .addError(2, "Bad assignment.")
+    .test([
+      "0 **= x;",
+      "this **= x;"
+    ], { esversion: 7 });
 
   test.done();
 };

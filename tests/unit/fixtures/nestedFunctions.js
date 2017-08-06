@@ -74,10 +74,3 @@ var VarDeclClass = class {
 var grouping = (function() {});
 
 export default function() {}
-
-// Ensure that the constructor name is accurately inferred even in cases where
-// the class name is not the most recently parsed identifier.
-var ConstructorLast = class {
-  methodFirst() {}
-  constructor() {}
-}
