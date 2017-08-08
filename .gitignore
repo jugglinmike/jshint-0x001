@@ -1,6 +1,8 @@
 node_modules/
 npm-debug.log
-
+run.txt
+test.js
+test.json
 # TextMate 2 properties file.
 .tm_properties
 
