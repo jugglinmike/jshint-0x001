@@ -5191,7 +5191,7 @@ var JSHINT = (function() {
       advance("class");
       var classNameToken = state.tokens.next;
       state.syntax["class"].fud(context);
-      state.funct["(scoe)"].setExported(classNameToken.value, classNameToken);
+      state.funct["(scope)"].setExported(classNameToken.value, classNameToken);
     } else {
       error("E024", state.tokens.next, state.tokens.next.value);
     }
