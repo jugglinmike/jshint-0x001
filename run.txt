@@ -1,0 +1,2172 @@
+
+> jshint@2.9.4 test-unit /root/jshint
+> nodeunit tests/unit tests/unit/unstable
+
+
+[1mcore[22m
+✔ testCustomGlobals
+✔ testUnusedDefinedGlobals
+✔ testImplieds
+[31m✖ testExportedDefinedGlobals[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testExportedDefinedGlobals (/root/jshint/tests/unit/core.js:90:17)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+✔ testGlobalVarDeclarations
+✔ globalDeclarations
+✔ multilineGlobalDeclarations
+✔ testNewArray
+✔ testNewNonNativeArray
+✔ testNonNativeArray
+✔ testNewObject
+✔ testNewNonNativeObject
+[31m✖ testUndefinedAsParam[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 12} Expected an identifier and instead saw 'undefined' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 12} Expected an identifier and instead saw 'undefined' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testUndefinedAsParam (/root/jshint/tests/unit/core.js:237:17)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'undefined' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'undefined' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testUndefinedAsParam (/root/jshint/tests/unit/core.js:242:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+✔ newLineAfterDot
+✔ noDelete
+✔ switchFallThrough
+✔ switchDefaultFirst
+✔ testVoid
+✔ functionScopedOptions
+✔ jslintOptions
+✔ jslintInverted
+✔ jslintRenamed
+✔ jslintSloppy
+✔ jslintUnrecognized
+✔ caseExpressions
+✔ returnStatement
+✔ argsInCatchReused
+✔ testRawOnError
+✔ yesEmptyStmt
+✔ insideEval
+✔ escapedEvil
+✔ noExcOnTooManyUndefined
+✔ defensiveSemicolon
+✔ iife
+✔ invalidOptions
+✔ multilineArray
+✔ testInvalidSource
+✔ testConstructor
+✔ missingRadix
+✔ NumberNaN
+✔ htmlEscapement
+✔ testSparseArrays
+[31m✖ testReserved[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 5, Char undefined} Expected an identifier and instead saw 'let' (a reserved word).
+ [bold]{Line 10, Char undefined} Expected an identifier and instead saw 'let' (a reserved word).
+ [bold]{Line 13, Char undefined} Expected an identifier and instead saw 'class' (a reserved word).
+ [bold]{Line 14, Char undefined} Expected an identifier and instead saw 'else' (a reserved word).
+ [bold]{Line 15, Char undefined} Expected an identifier and instead saw 'protected' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 5, Char undefined} Expected an identifier and instead saw 'let' (a reserved word).
+ [bold]{Line 10, Char undefined} Expected an identifier and instead saw 'let' (a reserved word).
+ [bold]{Line 13, Char undefined} Expected an identifier and instead saw 'class' (a reserved word).
+ [bold]{Line 14, Char undefined} Expected an identifier and instead saw 'else' (a reserved word).
+ [bold]{Line 15, Char undefined} Expected an identifier and instead saw 'protected' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testReserved (/root/jshint/tests/unit/core.js:609:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 5, Char undefined} Expected an identifier and instead saw 'let' (a reserved word).
+ [bold]{Line 10, Char undefined} Expected an identifier and instead saw 'let' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 5, Char undefined} Expected an identifier and instead saw 'let' (a reserved word).
+ [bold]{Line 10, Char undefined} Expected an identifier and instead saw 'let' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testReserved (/root/jshint/tests/unit/core.js:614:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+[31m✖ testES5Reserved[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 2, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
+ [bold]{Line 3, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
+ [bold]{Line 6, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
+ [bold]{Line 7, Char undefined} Expected an identifier and instead saw 'new' (a reserved word).
+ [bold]{Line 9, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
+ [bold]{Line 10, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
+ [bold]{Line 11, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 2, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
+ [bold]{Line 3, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
+ [bold]{Line 6, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
+ [bold]{Line 7, Char undefined} Expected an identifier and instead saw 'new' (a reserved word).
+ [bold]{Line 9, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
+ [bold]{Line 10, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
+ [bold]{Line 11, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testES5Reserved (/root/jshint/tests/unit/core.js:634:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 6, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
+ [bold]{Line 7, Char undefined} Expected an identifier and instead saw 'new' (a reserved word).
+ [bold]{Line 11, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 6, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
+ [bold]{Line 7, Char undefined} Expected an identifier and instead saw 'new' (a reserved word).
+ [bold]{Line 11, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testES5Reserved (/root/jshint/tests/unit/core.js:641:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+✔ testCatchBlocks
+✔ testNumericParams
+✔ testForIn
+✔ testRegexArray
+✔ testUndefinedAssignment
+[31m✖ testES6Modules[39m
+
+TypeError: Cannot read property 'setExported' of undefined
+    at Object.fud (/root/jshint/src/jshint.js:5199:28)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.testES6Modules (/root/jshint/tests/unit/core.js:850:11)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate._onImmediate (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+
+[31m✖ testES6ModulesNamedExportsAffectUnused[39m
+
+TypeError: Cannot read property 'setExported' of undefined
+    at Object.fud (/root/jshint/src/jshint.js:5199:28)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.testES6ModulesNamedExportsAffectUnused (/root/jshint/tests/unit/core.js:936:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate._onImmediate (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+
+✔ testConstRedeclaration
+✔ test typeof in TDZ
+✔ testConstModification
+[31m✖ class declaration export[39m
+
+TypeError: Cannot read property 'desc' of undefined
+    at quit (/root/jshint/src/jshint.js:333:40)
+    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.class declaration export (/root/jshint/tests/unit/core.js:1081:17)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+
+[31m✖ function declaration export[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 7, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 7, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.function declaration export (/root/jshint/tests/unit/core.js:1092:17)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+[31m✖ classIsBlockScoped[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 4, Char undefined} 'C' was used before it was declared, which is illegal for 'class' variables.
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 2, Char 11} Missing semicolon.
+  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 3, Char 21} Missing semicolon.
+  [bold]{Line 4, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 4, Char 11} Missing semicolon.
+  [bold]{Line 6, Char 14} Missing semicolon.
+  [bold]{Line 6, Char 15} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 6, Char 16} Missing semicolon.
+  [bold]{Line 6, Char 33} Missing semicolon.
+  [bold]{Line 7, Char 11} Missing semicolon.
+  [bold]{Line 8, Char 2} Unnecessary semicolon.
+  [bold]{Line 11, Char 3} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 11, Char 13} Missing semicolon.
+  [bold]{Line 6, Char 15} 'D' is not defined.
+  [bold]{Line 6, Char 36} 'D' is not defined.
+  [bold]{Line 7, Char 21} 'D' is not defined.
+  [bold]{Line 6, Char 20} 'constructor' is not defined.
+  [bold]{Line 7, Char 3} 'myfunc' is not defined.
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 4, Char undefined} 'C' was used before it was declared, which is illegal for 'class' variables.
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 2, Char 11} Missing semicolon.
+  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 3, Char 21} Missing semicolon.
+  [bold]{Line 4, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 4, Char 11} Missing semicolon.
+  [bold]{Line 6, Char 14} Missing semicolon.
+  [bold]{Line 6, Char 15} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 6, Char 16} Missing semicolon.
+  [bold]{Line 6, Char 33} Missing semicolon.
+  [bold]{Line 7, Char 11} Missing semicolon.
+  [bold]{Line 8, Char 2} Unnecessary semicolon.
+  [bold]{Line 11, Char 3} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 11, Char 13} Missing semicolon.
+  [bold]{Line 6, Char 15} 'D' is not defined.
+  [bold]{Line 6, Char 36} 'D' is not defined.
+  [bold]{Line 7, Char 21} 'D' is not defined.
+  [bold]{Line 6, Char 20} 'constructor' is not defined.
+  [bold]{Line 7, Char 3} 'myfunc' is not defined.
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.classIsBlockScoped (/root/jshint/tests/unit/core.js:1124:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+[31m✖ testES6ModulesNamedExportsAffectUndef[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testES6ModulesNamedExportsAffectUndef (/root/jshint/tests/unit/core.js:1143:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+[31m✖ testES6ModulesThroughExportDoNotAffectUnused[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testES6ModulesThroughExportDoNotAffectUnused (/root/jshint/tests/unit/core.js:1167:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+[31m✖ testES6ModulesThroughExportDoNotAffectUndef[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testES6ModulesThroughExportDoNotAffectUndef (/root/jshint/tests/unit/core.js:1191:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+[31m✖ testES6ModulesDefaultExportsAffectUnused[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 7, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 8, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 9, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 9, Char 22} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 9, Char 29} Missing semicolon.
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 7, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 8, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 9, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 9, Char 22} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 9, Char 29} Missing semicolon.
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testES6ModulesDefaultExportsAffectUnused (/root/jshint/tests/unit/core.js:1214:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+[31m✖ testES6ModulesDefaultExportAssignmentExpr[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testES6ModulesDefaultExportAssignmentExpr (/root/jshint/tests/unit/core.js:1231:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+[31m✖ testES6ModulesNameSpaceImportsAffectUnused[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testES6ModulesNameSpaceImportsAffectUnused (/root/jshint/tests/unit/core.js:1243:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+✔ testES6TemplateLiterals
+✔ testES6TaggedTemplateLiterals
+✔ testES6TemplateLiteralsUnused
+✔ testES6TaggedTemplateLiteralsUnused
+✔ testES6TemplateLiteralsUndef
+✔ testES6TaggedTemplateLiteralsUndef
+✔ testES6TemplateLiteralMultiline
+✔ testES6TemplateLiteralsAreNotDirectives
+✔ testES6TemplateLiteralReturnValue
+✔ testES6TemplateLiteralMultilineReturnValue
+✔ testES6TaggedTemplateLiteralMultilineReturnValue
+✔ testES6TemplateLiteralMultilineReturnValueWithFunctionCall
+✔ testES6TaggedTemplateLiteralMultilineReturnValueWithFunctionCall
+✔ testMultilineReturnValueStringLiteral
+[31m✖ testES6ExportStarFrom[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testES6ExportStarFrom (/root/jshint/tests/unit/core.js:1499:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+✔ testPotentialVariableLeak
+✔ testDefaultArguments
+✔ testDuplicateParamNames
+✔ testClonePassedObjects
+✔ testMagicProtoVariable
+✔ testColumnNumAfterNonStrictComparison
+✔ testArrayPrototypeExtensions
+✔ testIncorrectJsonDetection
+[31m✖ testEscapedReservedWords[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'var' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'var' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testEscapedReservedWords (/root/jshint/tests/unit/core.js:1675:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+✔ testUnnamedFuncStatement
+✔ testUnCleanedForinifcheckneeded
+✔ testPermitEvalAsKey
+✔ beginningArraysAreNotJSON
+✔ labelsOutOfScope
+✔ labelThroughCatch
+✔ labelDoesNotExistInGlobalScope
+✔ labeledBreakWithoutLoop
+✔ labeledContinueWithoutLoop
+✔ unlabeledBreakWithoutLoop
+✔ unlabeledContinueWithoutLoop
+✔ labelsContinue
+✔ catchWithNoParam
+✔ tryWithoutCatch
+✔ gh-1920
+✔ duplicateProto
+✔ gh-2761
+✔ gh-2838
+✔ destructuring in setter parameter
+✔ TDZ within initializer of lexical declarations
+[31m✖ TDZ within class heritage definition[39m
+
+TypeError: Cannot read property 'desc' of undefined
+    at quit (/root/jshint/src/jshint.js:333:40)
+    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.TDZ within class heritage definition (/root/jshint/tests/unit/core.js:2199:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+
+✔ TDZ within for in/of head
+
+[1menvs[22m
+✔ node
+✔ typed
+✔ es5
+✔ phantom
+✔ globals
+
+[1mmodule-api[22m
+✔ test for GH-1103
+✔ identifiers
+
+[1moptions[22m
+✔ shadow
+✔ shadowouter
+✔ shadowInline
+✔ shadowEs6
+[31m✖ latedef[39m
+
+TypeError: Cannot read property 'setExported' of undefined
+    at Object.fud (/root/jshint/src/jshint.js:5199:28)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.latedef (/root/jshint/tests/unit/options.js:219:8)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate._onImmediate (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+
+✔ latedefInline
+✔ notypeof
+✔ combination of latedef and undef
+✔ undefwstrict
+✔ implied and unused should respect hoisting
+✔ testProtoAndIterator
+✔ testCamelcase
+✔ curly
+✔ noempty
+✔ noarg
+✔ nonew
+✔ shelljs
+✔ asi
+✔ safeasi
+✔ missing semicolons not influenced by asi
+✔ lastsemic
+✔ expr
+✔ undef
+✔ undefToOpMethods
+✔ undefDeleteStrict
+✔ unused - basic
+✔ unused - usedThroughShadowedDeclaration
+✔ unused - unusedThroughShadowedDeclaration
+✔ unused - hoisted
+✔ unused - crossBlocks
+✔ param overrides function name expression
+[31m✖ let can re-use function and class name[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 6, Char 14} Missing semicolon.
+  [bold]{Line 6, Char 15} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 6, Char 16} Missing semicolon.
+  [bold]{Line 6, Char 33} Missing semicolon.
+  [bold]{Line 6, Char 59} Unnecessary semicolon.
+  [bold]{Line 6, Char 15} 'E' is not defined.
+  [bold]{Line 6, Char 19} 'constructor' is not defined.
+  [bold]{Line 6, Char 31} 'F' is not defined.
+  [bold]{Line 6, Char 44} 'F' is not defined.
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 6, Char 14} Missing semicolon.
+  [bold]{Line 6, Char 15} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 6, Char 16} Missing semicolon.
+  [bold]{Line 6, Char 33} Missing semicolon.
+  [bold]{Line 6, Char 59} Unnecessary semicolon.
+  [bold]{Line 6, Char 15} 'E' is not defined.
+  [bold]{Line 6, Char 19} 'constructor' is not defined.
+  [bold]{Line 6, Char 31} 'F' is not defined.
+  [bold]{Line 6, Char 44} 'F' is not defined.
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.let can re-use function and class name (/root/jshint/tests/unit/options.js:1053:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+✔ unused with param destructuring
+✔ unused data with options
+✔ unused with global override
+✔ unused overrides
+✔ unused overrides esnext
+✔ unused with latedef function
+✔ undef in a function scope
+✔ scripturl
+✔ forin
+[31m✖ loopfunc[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 14, Char undefined} Don't make functions within a loop.
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 14, Char 12} Missing semicolon.
+  [bold]{Line 14, Char 28} Missing semicolon.
+  [bold]{Line 14, Char 45} Unnecessary semicolon.
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 14, Char undefined} Don't make functions within a loop.
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 14, Char 12} Missing semicolon.
+  [bold]{Line 14, Char 28} Missing semicolon.
+  [bold]{Line 14, Char 45} Unnecessary semicolon.
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.loopfunc (/root/jshint/tests/unit/options.js:1397:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+✔ boss
+✔ eqnull
+✔ supernew
+✔ bitwise
+✔ debug
+✔ eqeqeq
+✔ evil
+✔ immed
+✔ plusplus
+✔ newcap
+✔ sub
+✔ strict
+✔ strictEnvs
+✔ strictNoise
+✔ globalstrict
+✔ laxbreak
+✔ validthis
+✔ strings
+✔ quotes
+✔ quotesInline
+✔ quotesAndTemplateLiterals
+✔ scope - basic
+✔ scope - crossBlocks
+✔ esnext
+✔ mozAndEs6
+✔ maxlen
+✔ laxcomma
+✔ browser
+✔ unnecessarysemicolon
+✔ blacklist
+✔ maxstatements
+✔ maxdepth
+✔ maxparams
+✔ maxcomplexity
+✔ fnmetrics
+✔ ignored
+✔ unignored
+✔ per-line undef / -W117
+✔ freeze
+✔ nonbsp
+✔ nocomma
+✔ enforceall
+✔ removeglobal
+✔ ignoreDelimiters
+✔ esnextPredefs
+✔ singleGroups - loneIdentifier
+✔ singleGroups - neighborless
+✔ singleGroups - bindingPower - singleExpr
+✔ singleGroups - bindingPower - multiExpr
+✔ singleGroups - multiExpr
+✔ singleGroups - concatenation
+✔ singleGroups - functionExpression
+✔ singleGroups - generatorExpression
+✔ singleGroups - yield
+✔ singleGroups - arrowFunctions
+✔ singleGroups - exponentiation
+✔ singleGroups - objectLiterals
+✔ singleGroups - newLine
+✔ singleGroups - lineNumber
+✔ singleGroups - unary
+✔ singleGroups - numberLiterals
+✔ singleGroups - postfix
+✔ singleGroups - destructuringAssign
+✔ elision
+✔ badInlineOptionValue
+✔ futureHostile
+✔ varstmt
+[31m✖ module - behavior[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'package' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'package' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.module.behavior (/root/jshint/tests/unit/options.js:3749:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at async.forEachSeries (/root/jshint/node_modules/nodeunit/deps/async.js:139:9)
+    at _concat (/root/jshint/node_modules/nodeunit/deps/async.js:512:9)
+    at Object.concatSeries (/root/jshint/node_modules/nodeunit/deps/async.js:152:23)
+    at Object.exports.runSuite (/root/jshint/node_modules/nodeunit/lib/core.js:96:11)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:125:21
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'package' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'package' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.module.behavior (/root/jshint/tests/unit/options.js:3754:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at async.forEachSeries (/root/jshint/node_modules/nodeunit/deps/async.js:139:9)
+    at _concat (/root/jshint/node_modules/nodeunit/deps/async.js:512:9)
+    at Object.concatSeries (/root/jshint/node_modules/nodeunit/deps/async.js:152:23)
+    at Object.exports.runSuite (/root/jshint/node_modules/nodeunit/lib/core.js:96:11)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:125:21
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 2, Char undefined} Expected an identifier and instead saw 'package' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 2, Char undefined} Expected an identifier and instead saw 'package' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.module.behavior (/root/jshint/tests/unit/options.js:3766:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at async.forEachSeries (/root/jshint/node_modules/nodeunit/deps/async.js:139:9)
+    at _concat (/root/jshint/node_modules/nodeunit/deps/async.js:512:9)
+    at Object.concatSeries (/root/jshint/node_modules/nodeunit/deps/async.js:152:23)
+    at Object.exports.runSuite (/root/jshint/node_modules/nodeunit/lib/core.js:96:11)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:125:21
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 2, Char undefined} Expected an identifier and instead saw 'package' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 2, Char undefined} Expected an identifier and instead saw 'package' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.module.behavior (/root/jshint/tests/unit/options.js:3773:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at async.forEachSeries (/root/jshint/node_modules/nodeunit/deps/async.js:139:9)
+    at _concat (/root/jshint/node_modules/nodeunit/deps/async.js:512:9)
+    at Object.concatSeries (/root/jshint/node_modules/nodeunit/deps/async.js:152:23)
+    at Object.exports.runSuite (/root/jshint/node_modules/nodeunit/lib/core.js:96:11)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:125:21
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+
+✔ module - declarationRestrictions
+✔ module - newcap
+[31m✖ module - await[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'await' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'await' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.module.await (/root/jshint/tests/unit/options.js:3888:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'await' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'await' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.module.await (/root/jshint/tests/unit/options.js:3892:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+[31m✖ esversion[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{compatible option specified in-line}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 3, Char 11} Missing semicolon.
+[39m
+AssertionError: false == true
+  TestRun: [bold]{compatible option specified in-line}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 3, Char 11} Missing semicolon.
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.esversion (/root/jshint/tests/unit/options.js:4009:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at /root/jshint/node_modules/nodeunit/deps/async.js:518:13
+    at /root/jshint/node_modules/nodeunit/deps/async.js:131:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+
+Assertion Message: [35m
+  TestRun: [bold]{compatible option specified in-line}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 3, Char 11} Missing semicolon.
+[39m
+AssertionError: false == true
+  TestRun: [bold]{compatible option specified in-line}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 3, Char 11} Missing semicolon.
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.esversion (/root/jshint/tests/unit/options.js:4013:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at /root/jshint/node_modules/nodeunit/deps/async.js:518:13
+    at /root/jshint/node_modules/nodeunit/deps/async.js:131:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+
+Assertion Message: [35m
+  TestRun: [bold]{compatible option specified in-line}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 3, Char 11} Missing semicolon.
+[39m
+AssertionError: false == true
+  TestRun: [bold]{compatible option specified in-line}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
+  [bold]{Line 3, Char 11} Missing semicolon.
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.esversion (/root/jshint/tests/unit/options.js:4016:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at /root/jshint/node_modules/nodeunit/deps/async.js:518:13
+    at /root/jshint/node_modules/nodeunit/deps/async.js:131:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+
+✔ trailingcomma
+✔ unstable
+✔ leanswitch
+
+[1mparser[22m
+✔ unsafe
+✔ peekOverDirectives
+✔ other
+✔ confusingOps
+✔ division
+✔ plusplus
+✔ assignment
+✔ relations
+✔ options
+✔ emptyDirectives
+✔ jshint option comments single line
+✔ jshint option comments single line, leading and trailing space
+✔ jshint option comments multi line
+✔ jshint option comments multi line, leading and trailing space
+✔ jshint option comments multi line/option
+✔ jshint option comments multi line/option, leading and trailing space
+✔ shebang
+✔ shebangImpliesNode
+✔ numbers
+✔ comments
+✔ regexp
+✔ testRegexRegressions
+✔ regexpSticky
+✔ strings
+✔ badStrings
+✔ ownProperty
+✔ json - dflt
+✔ json - deep
+✔ json - errors
+✔ json - semicolon
+✔ comma
+✔ gh-2587
+✔ badAssignments
+✔ withStatement
+✔ blocks
+[31m✖ functionCharacterLocation[39m
+
+AssertionError: 34 == 27
+    at Object.equal (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.exports.functionCharacterLocation (/root/jshint/tests/unit/parser.js:1182:8)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+AssertionError: 'VarDeclClass' == '(empty)'
+    at Object.equal (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.exports.functionCharacterLocation (/root/jshint/tests/unit/parser.js:1184:10)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+AssertionError: 65 == 74
+    at Object.equal (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.exports.functionCharacterLocation (/root/jshint/tests/unit/parser.js:1185:10)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+AssertionError: 15 == 26
+    at Object.equal (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.exports.functionCharacterLocation (/root/jshint/tests/unit/parser.js:1186:10)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+AssertionError: 65 == 74
+    at Object.equal (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.exports.functionCharacterLocation (/root/jshint/tests/unit/parser.js:1187:10)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+AssertionError: 19 == 30
+    at Object.equal (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.exports.functionCharacterLocation (/root/jshint/tests/unit/parser.js:1188:10)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+AssertionError: 'func' == 'default'
+    at Object.equal (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.exports.functionCharacterLocation (/root/jshint/tests/unit/parser.js:1184:10)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+AssertionError: 66 == 76
+    at Object.equal (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.exports.functionCharacterLocation (/root/jshint/tests/unit/parser.js:1185:10)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+AssertionError: 15 == 25
+    at Object.equal (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.exports.functionCharacterLocation (/root/jshint/tests/unit/parser.js:1186:10)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+AssertionError: 66 == 76
+    at Object.equal (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.exports.functionCharacterLocation (/root/jshint/tests/unit/parser.js:1187:10)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+AssertionError: 19 == 29
+    at Object.equal (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.exports.functionCharacterLocation (/root/jshint/tests/unit/parser.js:1188:10)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+TypeError: Cannot read property 'name' of undefined
+    at Object.exports.functionCharacterLocation (/root/jshint/tests/unit/parser.js:1184:44)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate._onImmediate (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+✔ exported
+✔ testIdentifiers
+✔ badIdentifiers
+✔ regression for GH-878
+✔ regression for GH-910
+✔ testHtml
+✔ destructuring var in function scope
+✔ destructuring var as moz
+✔ destructuring var as esnext
+✔ destructuring var as es5
+✔ destructuring var as legacy JS
+✔ destructuring var errors
+✔ destructuring const as moz
+✔ destructuring const as esnext
+✔ destructuring const as es5
+✔ destructuring const as legacy JS
+✔ destructuring const errors
+✔ destructuring globals as moz
+✔ destructuring globals as esnext
+✔ destructuring globals as es5
+✔ destructuring globals as legacy JS
+✔ destructuring globals with syntax error
+✔ destructuring assign of empty values as moz
+✔ destructuring assign of empty values as esnext
+✔ destructuring assign of empty values as es5
+✔ destructuring assign of empty values as JS legacy
+✔ destructuring assignment default values
+✔ destructuring assignment of valid simple assignment targets
+✔ non-identifier PropertyNames in object destructuring
+✔ empty destructuring
+✔ array element assignment inside array
+✔ let statement as moz
+✔ let statement as esnext
+✔ let statement as es5
+✔ let statement as legacy JS
+✔ let statement out of scope as moz
+✔ let statement out of scope as esnext
+✔ let statement out of scope as es5
+✔ let statement out of scope as legacy JS
+✔ let statement in functions as moz
+✔ let statement in functions as esnext
+✔ let statement in functions as es5
+✔ let statement in functions as legacy JS
+✔ let statement not in scope as moz
+✔ let statement not in scope as esnext
+✔ let statement not in scope as es5
+✔ let statement not in scope as legacy JS
+✔ let statement in for loop as moz
+✔ let statement in for loop as esnext
+✔ let statement in for loop as es5
+✔ let statement in for loop as legacy JS
+✔ let statement in destructured for loop as moz
+✔ let statement in destructured for loop as esnext
+✔ let statement in destructured for loop as es5
+✔ let statement in destructured for loop as legacy JS
+✔ let statement (as seen in jetpack)
+✔ let statement (as seen in jetpack) as esnext
+✔ let statement (as seen in jetpack) as es5
+✔ let statement (as seen in jetpack) as legacy JS
+✔ let block and let expression
+✔ let block and let expression as esnext
+✔ let block and let expression as es5
+✔ let block and let expression as legacy JS
+✔ make sure let variables are not treated as globals
+✔ make sure var variables can shadow let variables
+✔ make sure let variables in the closure of functions shadow predefined globals
+✔ make sure let variables in the closure of blocks shadow predefined globals
+✔ make sure variables may shadow globals in functions after they are referenced
+✔ test block scope redefines globals only outside of blocks
+✔ test destructuring function as moz
+✔ test destructuring function as esnext
+✔ test destructuring function as es5
+✔ test destructuring function as legacy JS
+✔ destructuring function default values
+✔ non-simple parameter list strict transition
+✔ non var destructuring assignment statement
+✔ invalid for each
+✔ invalid for each as esnext
+✔ invalid for each as ES5
+✔ invalid for each as legacy JS
+✔ esnext generator
+✔ esnext generator as moz extension
+✔ esnext generator as es5
+✔ esnext generator as legacy JS
+✔ esnext generator without yield
+✔ esnext generator without yield and check turned off
+✔ esnext generator with yield delegation, gh-1544
+✔ mozilla generator
+✔ mozilla generator as esnext
+✔ yield expression within try-catch
+✔ mozilla generator as es5
+✔ mozilla generator as legacy JS
+✔ array comprehension
+✔ array comprehension unused and undefined
+✔ gh-1856 mistakenly identified as array comprehension
+✔ gh-1413 wrongly detected as array comprehension
+✔ moz-style array comprehension
+✔ array comprehension with for..of
+✔ moz-style array comprehension with for..of
+✔ array comprehension with unused variables
+✔ moz-style array comprehension with unused variables
+✔ moz-style array comprehension as esnext
+✔ array comprehension as es5
+✔ moz-style array comprehension as es5
+✔ array comprehension as legacy JS
+✔ moz-style array comprehension as legacy JS
+✔ array comprehension with dest array at global scope
+✔ moz-style array comprehension with dest array at global scope
+✔ moz-style array comprehension with dest array at global scope as esnext
+✔ array comprehension with dest array at global scope as es5
+✔ moz-style array comprehension with dest array at global scope as es5
+✔ array comprehension with dest array at global scope as JS legacy
+✔ moz-style array comprehension with dest array at global scope as JS legacy
+✔ array comprehension imbrication with dest array
+✔ moz-style array comprehension imbrication with dest array
+✔ moz-style array comprehension imbrication with dest array using for..of
+✔ moz-style array comprehension imbrication with dest array as esnext
+✔ array comprehension imbrication with dest array as es5
+✔ moz-style array comprehension imbrication with dest array as es5
+✔ array comprehension imbrication with dest array as legacy JS
+✔ moz-style array comprehension imbrication with dest array as legacy JS
+✔ no false positive array comprehension
+✔ try catch filters
+✔ try catch filters as esnext
+✔ try catch filters as es5
+✔ try catch filters as legacy JS
+✔ function closure expression
+✔ function closure expression as esnext
+✔ function closure expression as es5
+✔ function closure expression as legacy JS
+✔ for of as esnext
+✔ for of as es5
+✔ for of as legacy JS
+✔ array destructuring for of as esnext
+✔ array destructuring for of as es5
+✔ array destructuring for of as legacy JS
+✔ object destructuring for of as esnext
+✔ object destructuring for of as es5
+✔ object destructuring for of as legacy JS
+✔ try multi-catch for moz extensions
+✔ try multi-catch as esnext
+✔ try multi-catch as es5
+✔ try multi-catch as legacy JS
+✔ no let not directly within a block
+✔ no const not directly within a block
+✔ test: let declared directly within block
+✔ test: let is directly within nested block
+✔ regression test for crash from GH-964
+✔ ASI - gh950
+✔ ASI - followingYield
+✔ ASI - followingPostfix
+✔ fat arrows support
+✔ fat arrow nested function scoping
+✔ default arguments in fat arrow functions
+✔ expressions in place of arrow function parameters
+✔ arrow function parameter containing semicolon (gh-3002)
+✔ conciseMethods - basicSupport
+✔ conciseMethods - getAndSet
+✔ conciseMethods - getWithoutSet
+✔ conciseMethods - nameIsNotLocalVar
+✔ object short notation: basic
+✔ object short notation: mixed
+✔ object ComputedPropertyName
+✔ spread & rest operator support
+✔ parameter destructuring with rest
+✔ test for GH-1010
+[31m✖ classes[39m
+
+TypeError: Cannot read property 'desc' of undefined
+    at quit (/root/jshint/src/jshint.js:333:40)
+    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.classes (/root/jshint/tests/unit/parser.js:6153:7)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+
+[31m✖ class and method naming[39m
+
+TypeError: Cannot read property 'desc' of undefined
+    at quit (/root/jshint/src/jshint.js:333:40)
+    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.class and method naming (/root/jshint/tests/unit/parser.js:6250:7)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+
+[31m✖ computed class methods aren't duplicate[39m
+
+TypeError: Cannot read property 'desc' of undefined
+    at quit (/root/jshint/src/jshint.js:333:40)
+    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.computed class methods aren't duplicate (/root/jshint/tests/unit/parser.js:6272:17)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+
+[31m✖ class method this[39m
+
+TypeError: Cannot read property 'desc' of undefined
+    at quit (/root/jshint/src/jshint.js:333:40)
+    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.class method this (/root/jshint/tests/unit/parser.js:6294:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+
+[31m✖ classNewcap[39m
+
+TypeError: Cannot read property 'desc' of undefined
+    at quit (/root/jshint/src/jshint.js:333:40)
+    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.classNewcap (/root/jshint/tests/unit/parser.js:6312:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+
+[31m✖ classExpression[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 2, Char undefined} Reassignment of 'MyClass', which is is a class. Use 'var' or 'let' to declare bindings that may change.
+ [bold]{Line 3, Char undefined} Reassignment of 'MyClass', which is is a class. Use 'var' or 'let' to declare bindings that may change.
+ [bold]{Line 4, Char undefined} Reassignment of 'MyClass', which is is a class. Use 'var' or 'let' to declare bindings that may change.
+ [bold]{Line 5, Char undefined} Reassignment of 'MyClass', which is is a class. Use 'var' or 'let' to declare bindings that may change.
+ [bold]{Line 6, Char undefined} Reassignment of 'MyClass', which is is a class. Use 'var' or 'let' to declare bindings that may change.
+ [bold]{Line 7, Char undefined} Reassignment of 'MyClass', which is is a class. Use 'var' or 'let' to declare bindings that may change.
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 11} Missing semicolon.
+  [bold]{Line 1, Char 12} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 1, Char 19} Missing semicolon.
+  [bold]{Line 2, Char 16} Missing semicolon.
+  [bold]{Line 3, Char 11} Missing semicolon.
+  [bold]{Line 4, Char 3} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 4, Char 9} Missing semicolon.
+  [bold]{Line 4, Char 18} Missing semicolon.
+  [bold]{Line 5, Char 3} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 5, Char 6} Missing semicolon.
+  [bold]{Line 5, Char 17} Missing semicolon.
+  [bold]{Line 6, Char 3} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 6, Char 6} Missing semicolon.
+  [bold]{Line 6, Char 17} Missing semicolon.
+  [bold]{Line 7, Char 12} Missing semicolon.
+  [bold]{Line 8, Char 2} Unnecessary semicolon.
+  [bold]{Line 1, Char 12} 'MyClass' is not defined.
+  [bold]{Line 2, Char 19} 'MyClass' is not defined.
+  [bold]{Line 3, Char 14} 'MyClass' is not defined.
+  [bold]{Line 4, Char 21} 'MyClass' is not defined.
+  [bold]{Line 5, Char 20} 'MyClass' is not defined.
+  [bold]{Line 6, Char 20} 'MyClass' is not defined.
+  [bold]{Line 7, Char 15} 'MyClass' is not defined.
+  [bold]{Line 2, Char 3} 'constructor' is not defined.
+  [bold]{Line 3, Char 3} 'method' is not defined.
+  [bold]{Line 4, Char 10} 'method' is not defined.
+  [bold]{Line 4, Char 3} 'static' is not defined.
+  [bold]{Line 5, Char 3} 'get' is not defined.
+  [bold]{Line 5, Char 7} 'accessor' is not defined.
+  [bold]{Line 6, Char 7} 'accessor' is not defined.
+  [bold]{Line 6, Char 3} 'set' is not defined.
+  [bold]{Line 7, Char 3} 'method2' is not defined.
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 2, Char undefined} Reassignment of 'MyClass', which is is a class. Use 'var' or 'let' to declare bindings that may change.
+ [bold]{Line 3, Char undefined} Reassignment of 'MyClass', which is is a class. Use 'var' or 'let' to declare bindings that may change.
+ [bold]{Line 4, Char undefined} Reassignment of 'MyClass', which is is a class. Use 'var' or 'let' to declare bindings that may change.
+ [bold]{Line 5, Char undefined} Reassignment of 'MyClass', which is is a class. Use 'var' or 'let' to declare bindings that may change.
+ [bold]{Line 6, Char undefined} Reassignment of 'MyClass', which is is a class. Use 'var' or 'let' to declare bindings that may change.
+ [bold]{Line 7, Char undefined} Reassignment of 'MyClass', which is is a class. Use 'var' or 'let' to declare bindings that may change.
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 11} Missing semicolon.
+  [bold]{Line 1, Char 12} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 1, Char 19} Missing semicolon.
+  [bold]{Line 2, Char 16} Missing semicolon.
+  [bold]{Line 3, Char 11} Missing semicolon.
+  [bold]{Line 4, Char 3} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 4, Char 9} Missing semicolon.
+  [bold]{Line 4, Char 18} Missing semicolon.
+  [bold]{Line 5, Char 3} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 5, Char 6} Missing semicolon.
+  [bold]{Line 5, Char 17} Missing semicolon.
+  [bold]{Line 6, Char 3} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 6, Char 6} Missing semicolon.
+  [bold]{Line 6, Char 17} Missing semicolon.
+  [bold]{Line 7, Char 12} Missing semicolon.
+  [bold]{Line 8, Char 2} Unnecessary semicolon.
+  [bold]{Line 1, Char 12} 'MyClass' is not defined.
+  [bold]{Line 2, Char 19} 'MyClass' is not defined.
+  [bold]{Line 3, Char 14} 'MyClass' is not defined.
+  [bold]{Line 4, Char 21} 'MyClass' is not defined.
+  [bold]{Line 5, Char 20} 'MyClass' is not defined.
+  [bold]{Line 6, Char 20} 'MyClass' is not defined.
+  [bold]{Line 7, Char 15} 'MyClass' is not defined.
+  [bold]{Line 2, Char 3} 'constructor' is not defined.
+  [bold]{Line 3, Char 3} 'method' is not defined.
+  [bold]{Line 4, Char 10} 'method' is not defined.
+  [bold]{Line 4, Char 3} 'static' is not defined.
+  [bold]{Line 5, Char 3} 'get' is not defined.
+  [bold]{Line 5, Char 7} 'accessor' is not defined.
+  [bold]{Line 6, Char 7} 'accessor' is not defined.
+  [bold]{Line 6, Char 3} 'set' is not defined.
+  [bold]{Line 7, Char 3} 'method2' is not defined.
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.classExpression (/root/jshint/tests/unit/parser.js:6338:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+✔ functionReassignment
+✔ functionNotOverwritten
+[31m✖ classExpressionThis[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 11} Missing semicolon.
+  [bold]{Line 1, Char 12} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 1, Char 19} Missing semicolon.
+  [bold]{Line 2, Char 16} Missing semicolon.
+  [bold]{Line 3, Char 11} Missing semicolon.
+  [bold]{Line 4, Char 3} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 4, Char 9} Missing semicolon.
+  [bold]{Line 4, Char 18} Missing semicolon.
+  [bold]{Line 5, Char 3} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 5, Char 6} Missing semicolon.
+  [bold]{Line 5, Char 17} Missing semicolon.
+  [bold]{Line 6, Char 3} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 6, Char 6} Missing semicolon.
+  [bold]{Line 6, Char 17} Missing semicolon.
+  [bold]{Line 7, Char 2} Unnecessary semicolon.
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 11} Missing semicolon.
+  [bold]{Line 1, Char 12} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 1, Char 19} Missing semicolon.
+  [bold]{Line 2, Char 16} Missing semicolon.
+  [bold]{Line 3, Char 11} Missing semicolon.
+  [bold]{Line 4, Char 3} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 4, Char 9} Missing semicolon.
+  [bold]{Line 4, Char 18} Missing semicolon.
+  [bold]{Line 5, Char 3} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 5, Char 6} Missing semicolon.
+  [bold]{Line 5, Char 17} Missing semicolon.
+  [bold]{Line 6, Char 3} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 6, Char 6} Missing semicolon.
+  [bold]{Line 6, Char 17} Missing semicolon.
+  [bold]{Line 7, Char 2} Unnecessary semicolon.
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.classExpressionThis (/root/jshint/tests/unit/parser.js:6396:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+[31m✖ classElementEmpty[39m
+
+TypeError: Cannot read property 'desc' of undefined
+    at quit (/root/jshint/src/jshint.js:333:40)
+    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.classElementEmpty (/root/jshint/tests/unit/parser.js:6420:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+
+[31m✖ invalidClasses[39m
+
+TypeError: Cannot read property 'desc' of undefined
+    at quit (/root/jshint/src/jshint.js:333:40)
+    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.invalidClasses (/root/jshint/tests/unit/parser.js:6430:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+
+✔ test for GH-1018
+✔ test warnings for assignments in conditionals
+✔ test for GH-1089
+✔ test for GH-1105
+✔ test for crash with invalid condition
+✔ test 'yield' in compound expressions.
+✔ test 'yield' in invalid positions
+✔ test for GH-387
+✔ test for line breaks with 'yield'
+✔ yieldRegExp
+✔ unreachable - regression for GH-1227
+✔ unreachable - break
+✔ unreachable - continue
+✔ unreachable - return
+✔ unreachable - throw
+✔ unreachable - braceless
+✔ unreachable - nestedBraceless
+✔ test for 'break' in switch case + curly braces
+✔ test for 'break' in switch case in loop + curly braces
+✔ allow expression with a comma in switch case condition
+✔ ignoreDirective - should be a good option and only accept start, end or line as values
+✔ ignoreDirective - should allow the linter to skip blocked-out lines to continue finding errors in the rest of the code
+✔ ignoreDirective - should ignore lines that appear to end with multiline comment endings (GH-1691)
+✔ ignoreDirective - should ignore lines that end with a multi-line comment (GH-1396)
+✔ ignoreDirective - should ignore multi-line comments
+✔ ignoreDirective - should be detected even with leading and/or trailing whitespace
+✔ ignoreDirective - should apply to lines lexed during lookahead operations
+✔ should be able to ignore a single line with a trailing comment: // jshint:ignore
+✔ regression test for GH-1431
+✔ jshint ignore:start/end should be detected using single line comments
+✔ test destructuring function parameters as es5
+✔ test destructuring function parameters as legacy JS
+✔ test for parentheses in odd-numbered token
+✔ regression crash from GH-1573
+✔ make sure we don't throw errors on removed options
+✔ 'for of' shouldn't be subject to 'for in' rules
+✔ enforcement of `forin` option should be tolerant of invalid syntax
+✔ Ignore strings containing braces within array literal declarations
+✔ gh-1016: don't issue W088 if identifier is outside of blockscope
+[31m✖ testES6UnusedExports[39m
+
+TypeError: Cannot read property 'setExported' of undefined
+    at Object.fud (/root/jshint/src/jshint.js:5199:28)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.testES6UnusedExports (/root/jshint/tests/unit/parser.js:7465:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate._onImmediate (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+
+[31m✖ testES6BlockExports[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 4, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 5, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 6, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 7, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 8, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 14, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 15, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 16, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 17, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 18, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 4, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 5, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 6, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 7, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 8, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 14, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 15, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 16, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 17, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 18, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testES6BlockExports (/root/jshint/tests/unit/parser.js:7511:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+[31m✖ testES6BlockImports[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 2, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 5, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 8, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 11, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 2, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 5, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 8, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 11, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testES6BlockImports (/root/jshint/tests/unit/parser.js:7538:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+✔ testStrictDirectiveASI
+✔ dereferenceDelete
+✔ trailingCommaInObjectBindingPattern
+✔ trailingCommaInObjectBindingPatternParameters
+✔ trailingCommaInArrayBindingPattern
+✔ trailingCommaInArrayBindingPatternParameters
+✔ testGH1879
+✔ commaAfterRestElementInArrayBindingPattern
+✔ commaAfterRestElementInArrayBindingPatternParameters
+✔ commaAfterRestParameter
+✔ extraRestOperator
+[31m✖ restOperatorWithoutIdentifier[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 6, Char undefined} Expected an identifier and instead saw 'var' (a reserved word).
+ [bold]{Line 7, Char undefined} Expected an identifier and instead saw 'var' (a reserved word).
+ [bold]{Line 7, Char undefined} Expected an identifier and instead saw 'void' (a reserved word).
+ [bold]{Line 8, Char undefined} Expected an identifier and instead saw 'var' (a reserved word).
+ [bold]{Line 8, Char undefined} Too many errors. (44% scanned).
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 9, Char 5} Expected ',' and instead saw 'arrow3'.
+  [bold]{Line 9, Char 12} Expected an identifier and instead saw '='.
+  [bold]{Line 9, Char 14} Expected ',' and instead saw '('.
+  [bold]{Line 9, Char 19} Expected an identifier and instead saw ']'.
+  [bold]{Line 9, Char 19} Too many errors. (50% scanned).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 6, Char undefined} Expected an identifier and instead saw 'var' (a reserved word).
+ [bold]{Line 7, Char undefined} Expected an identifier and instead saw 'var' (a reserved word).
+ [bold]{Line 7, Char undefined} Expected an identifier and instead saw 'void' (a reserved word).
+ [bold]{Line 8, Char undefined} Expected an identifier and instead saw 'var' (a reserved word).
+ [bold]{Line 8, Char undefined} Too many errors. (44% scanned).
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 9, Char 5} Expected ',' and instead saw 'arrow3'.
+  [bold]{Line 9, Char 12} Expected an identifier and instead saw '='.
+  [bold]{Line 9, Char 14} Expected ',' and instead saw '('.
+  [bold]{Line 9, Char 19} Expected an identifier and instead saw ']'.
+  [bold]{Line 9, Char 19} Too many errors. (50% scanned).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.restOperatorWithoutIdentifier (/root/jshint/tests/unit/parser.js:7862:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+✔ invalidSpread
+✔ getAsIdentifierProp
+✔ invalidParams
+✔ functionKeyword
+✔ nonGeneratorAfterGenerator
+[31m✖ new.target[39m
+
+TypeError: Cannot read property 'desc' of undefined
+    at quit (/root/jshint/src/jshint.js:333:40)
+    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:1998:9)
+    at statements (/root/jshint/src/jshint.js:2051:16)
+    at itself (/root/jshint/src/jshint.js:5885:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.new.target (/root/jshint/tests/unit/parser.js:7963:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+
+✔ lazyIdentifierChecks
+✔ parsingCommas
+[31m✖ instanceOfLiterals[39m
+
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 13, Char undefined} Expected an identifier and instead saw 'undefined' (a reserved word).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 13, Char undefined} Expected an identifier and instead saw 'undefined' (a reserved word).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.instanceOfLiterals (/root/jshint/tests/unit/parser.js:8147:7)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+✔ forInExpr
+✔ octalEscape
+✔ lookaheadBeyondEnd
+✔ exponentiation - esversion
+✔ exponentiation - whitespace
+✔ exponentiation - leftPrecedence
+✔ exponentiation - rightPrecedence
+✔ exponentiation - compundAssignment
+
+[1mobjrestspread[22m
+✔ enabling
+✔ spread
+✔ rest
+
+[1m[31mFAILURES: [39m[22m60/1087 assertions failed (21457ms)

@@ -894,7 +894,7 @@ var JSHINT = (function() {
   /**
    * The `expression` function is the heart of JSHint's parsing behaior. It is
    * based on the Pratt parser, but it extends that model with a `fud` method.
-   * Short for "firtst null denotation," it it similar to the `nud` ("null
+   * Short for "first null denotation," it it similar to the `nud` ("null
    * denotation") function, but it is only used on the first token of a
    * statement. This simplifies usage in statement-oriented languages like
    * JavaScript.
@@ -1775,7 +1775,7 @@ var JSHINT = (function() {
 
     var curr = state.tokens.curr;
     var val  = state.tokens.curr.value;
-
+    
     if (!isReserved(curr)) {
       return val;
     }
@@ -1790,6 +1790,11 @@ var JSHINT = (function() {
       return val;
     }
 
+    if (curr.identifier) {
+      return val;
+    }
+
+     
     warning("W024", state.tokens.curr, state.tokens.curr.id);
     return val;
   }
@@ -1942,7 +1947,6 @@ var JSHINT = (function() {
     // We're being more tolerant here: if someone uses
     // a FutureReservedWord as a label, we warn but proceed
     // anyway.
-
     if (res && t.meta && t.meta.isFutureReservedWord) {
       warning("W024", t, t.id);
       res = false;
@@ -3542,7 +3546,7 @@ var JSHINT = (function() {
       verifyMaxParametersPerFunction: function() {
         if (_.isNumber(state.option.maxparams) &&
           this.arity > state.option.maxparams) {
-          warning("W072", functionStartToken, this.arity);
+         warning("W072", functionStartToken, this.arity);
         }
       },
 
@@ -5010,6 +5014,65 @@ var JSHINT = (function() {
     return this;
   }).exps = true;
 
+  stmt("class", function(context) {
+    if (!state.inES6()) {
+      warning("W104", state.tokens.curr, "class", "6");
+    }
+    if (state.tokens.next.identifier) {
+      this.name = identifier();
+      state.funct["(scope)"].addlabel(this.name, {
+        type: "class",
+        initialized: true,
+        token: state.tokens.curr
+      });
+    } else {
+      quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
+    }
+
+    if (state.tokens.next.value === "extends") {
+      advance("extends");
+      identifier();
+    }
+    advance("{");
+    var is_static = false;
+    var props = {};
+    while (state.tokens.next.value !== "}") {
+      advance();
+      switch (state.tokens.next.value) {
+        case "static":
+          is_static = true;
+          advance();
+          break;
+        case "set":
+        case "get":
+          var type = state.tokens.next.value;
+          advance();
+          if (!state.tokens.next.identifier) { 
+            quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
+          } else {
+            advance();
+            saveAccessor(state.tokens.curr.value, props, state.tokens.next.value, state.tokens.next, true, is_static);
+            is_static = false;
+            advance();
+            state.syntax["function"].fud();
+          }
+          break;
+        default:
+          if (!state.tokens.next.identifier) {
+            quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
+            break;
+          } else {
+            saveProperty(props, state.tokens.next.value, state.tokens.next, true, is_static);
+            is_static = false;
+            state.syntax["function"].fud();
+          }
+          
+      } 
+    }
+    advance("}");
+    return this;
+  }).exps = true;
+
   stmt("export", function(context) {
     var ok = true;
     var token;
@@ -5128,7 +5191,7 @@ var JSHINT = (function() {
       advance("class");
       var classNameToken = state.tokens.next;
       state.syntax["class"].fud(context);
-      state.funct["(scope)"].setExported(classNameToken.value, classNameToken);
+      state.funct["(scoe)"].setExported(classNameToken.value, classNameToken);
     } else {
       error("E024", state.tokens.next, state.tokens.next.value);
     }
