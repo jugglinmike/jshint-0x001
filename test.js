@@ -1,11 +1,15 @@
-class x extends blarg {
+var lol = function() {
+  return "we are devo";
+}
+
+class test {
   static hello() {
-    return 4
+    return 4;
   }
 }
 
-const y = 1
-
-function test(undefined) {
-  return 5;
+const x = class {
+  static goodbye() {
+    return 4;
+  }
 }

@@ -2752,6 +2752,75 @@ var JSHINT = (function() {
   });
   state.syntax["new"].exps = true;
 
+  
+  const doClassInternals = function(context) {
+    if (!state.inES6()) {
+      warning("W104", state.tokens.curr, "class", "6");
+    }
+    // Class Declaration
+    if (state.tokens.next.identifier) {
+      this.name = identifier();
+      state.funct["(scope)"].addlabel(this.name, {
+        type: "class",
+        initialized: true,
+        token: state.tokens.curr
+      });
+
+      if (state.tokens.next.value === "extends") {
+        advance("extends");
+        identifier();
+      }
+      advance("{");
+
+    // Class Expression
+    } else if (state.tokens.next.value === "{") {
+      advance("{")
+    } else {
+      warning("W116", state.tokens.curr, "identifier", state.tokens.next.type);
+      advance();
+    }
+
+    var is_static = false;
+    var props = {};
+    while (state.tokens.next.value !== "}") {
+      advance();
+      switch (state.tokens.next.value) {
+        case "static":
+          is_static = true;
+          advance();
+          break;
+        case "set":
+        case "get":
+          var type = state.tokens.next.value;
+          advance();
+          if (!state.tokens.next.identifier) { 
+            quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
+          } else {
+            advance();
+            saveAccessor(state.tokens.curr.value, props, state.tokens.next.value, state.tokens.next, true, is_static);
+            is_static = false;
+            advance();
+            state.syntax["function"].fud();
+          }
+          break;
+        default:
+          if (!state.tokens.next.identifier) {
+            quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
+            break;
+          } else {
+            saveProperty(props, state.tokens.next.value, state.tokens.next, true, is_static);
+            is_static = false;
+            state.syntax["function"].fud();
+          }
+          
+      } 
+    }
+    advance("}");
+    return this;
+  }
+  
+  prefix("class", doClassInternals);
+
   prefix("void").exps = true;
 
   infix(".", function(context, left, that) {
@@ -5014,64 +5083,7 @@ var JSHINT = (function() {
     return this;
   }).exps = true;
 
-  stmt("class", function(context) {
-    if (!state.inES6()) {
-      warning("W104", state.tokens.curr, "class", "6");
-    }
-    if (state.tokens.next.identifier) {
-      this.name = identifier();
-      state.funct["(scope)"].addlabel(this.name, {
-        type: "class",
-        initialized: true,
-        token: state.tokens.curr
-      });
-    } else {
-      quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
-    }
-
-    if (state.tokens.next.value === "extends") {
-      advance("extends");
-      identifier();
-    }
-    advance("{");
-    var is_static = false;
-    var props = {};
-    while (state.tokens.next.value !== "}") {
-      advance();
-      switch (state.tokens.next.value) {
-        case "static":
-          is_static = true;
-          advance();
-          break;
-        case "set":
-        case "get":
-          var type = state.tokens.next.value;
-          advance();
-          if (!state.tokens.next.identifier) { 
-            quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
-          } else {
-            advance();
-            saveAccessor(state.tokens.curr.value, props, state.tokens.next.value, state.tokens.next, true, is_static);
-            is_static = false;
-            advance();
-            state.syntax["function"].fud();
-          }
-          break;
-        default:
-          if (!state.tokens.next.identifier) {
-            quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
-            break;
-          } else {
-            saveProperty(props, state.tokens.next.value, state.tokens.next, true, is_static);
-            is_static = false;
-            state.syntax["function"].fud();
-          }
-          
-      } 
-    }
-    advance("}");
-    return this;
-  }).exps = true;
+  blockstmt("class", doClassInternals).exps = true;
 
   stmt("export", function(context) {
     var ok = true;

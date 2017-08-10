@@ -7,34 +7,8 @@
 ✔ testCustomGlobals
 ✔ testUnusedDefinedGlobals
 ✔ testImplieds
-[31m✖ testExportedDefinedGlobals[39m
-
-Assertion Message: [35m
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-[39m
-AssertionError: false == true
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-
-    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
-    at Object.exports.testExportedDefinedGlobals (/root/jshint/tests/unit/core.js:90:17)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:781:20)
-    at tryOnImmediate (timers.js:743:5)
-    at processImmediate [as _immediateCallback] (timers.js:714:5)
-
+{"identifier":true,"type":"export","value":"export","line":2,"character":7,"from":1,"raw_text":"export"}
+✔ testExportedDefinedGlobals
 ✔ testGlobalVarDeclarations
 ✔ globalDeclarations
 ✔ multilineGlobalDeclarations
@@ -44,32 +18,6 @@ AssertionError: false == true
 ✔ testNewObject
 ✔ testNewNonNativeObject
 [31m✖ testUndefinedAsParam[39m
-
-Assertion Message: [35m
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 1, Char 12} Expected an identifier and instead saw 'undefined' (a reserved word).
-[39m
-AssertionError: false == true
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 1, Char 12} Expected an identifier and instead saw 'undefined' (a reserved word).
-
-    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
-    at Object.exports.testUndefinedAsParam (/root/jshint/tests/unit/core.js:237:17)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:781:20)
-    at tryOnImmediate (timers.js:743:5)
-    at processImmediate [as _immediateCallback] (timers.js:714:5)
 
 Assertion Message: [35m
   TestRun: [bold]{undefined}
@@ -199,6 +147,7 @@ Assertion Message: [35m
  [bold]{Line 3, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
  [bold]{Line 6, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
  [bold]{Line 7, Char undefined} Expected an identifier and instead saw 'new' (a reserved word).
+ [bold]{Line 8, Char undefined} Expected an identifier and instead saw 'class' (a reserved word).
  [bold]{Line 9, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
  [bold]{Line 10, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
  [bold]{Line 11, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
@@ -210,6 +159,7 @@ AssertionError: false == true
  [bold]{Line 3, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
  [bold]{Line 6, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
  [bold]{Line 7, Char undefined} Expected an identifier and instead saw 'new' (a reserved word).
+ [bold]{Line 8, Char undefined} Expected an identifier and instead saw 'class' (a reserved word).
  [bold]{Line 9, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
  [bold]{Line 10, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
  [bold]{Line 11, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
@@ -235,6 +185,7 @@ Assertion Message: [35m
   [yellow]{Errors defined, but not thrown by JSHINT}
  [bold]{Line 6, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
  [bold]{Line 7, Char undefined} Expected an identifier and instead saw 'new' (a reserved word).
+ [bold]{Line 8, Char undefined} Expected an identifier and instead saw 'class' (a reserved word).
  [bold]{Line 11, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
 [39m
 AssertionError: false == true
@@ -242,6 +193,7 @@ AssertionError: false == true
   [yellow]{Errors defined, but not thrown by JSHINT}
  [bold]{Line 6, Char undefined} Expected an identifier and instead saw 'default' (a reserved word).
  [bold]{Line 7, Char undefined} Expected an identifier and instead saw 'new' (a reserved word).
+ [bold]{Line 8, Char undefined} Expected an identifier and instead saw 'class' (a reserved word).
  [bold]{Line 11, Char undefined} Expected an identifier and instead saw 'in' (a reserved word).
 
     at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
@@ -265,86 +217,73 @@ AssertionError: false == true
 ✔ testForIn
 ✔ testRegexArray
 ✔ testUndefinedAssignment
+{"identifier":true,"type":"import","value":"import","line":3,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":4,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":5,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":6,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":7,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":8,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":9,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":10,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":11,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"export","value":"export","line":22,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":26,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":30,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":31,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":32,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":36,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":40,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":44,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":46,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":47,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":48,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"import","value":"import","line":57,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":58,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":59,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":60,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":65,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"export","value":"export","line":67,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"import","value":"import","line":3,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":4,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":5,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":6,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":7,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":8,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":9,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":10,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":11,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"export","value":"export","line":22,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":26,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":30,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":31,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":32,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":36,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":40,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":44,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":46,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":47,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":48,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"import","value":"import","line":57,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":58,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"export","value":"export","line":2,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"import","value":"import","line":3,"character":7,"from":1,"raw_text":"import"}
 [31m✖ testES6Modules[39m
-
-TypeError: Cannot read property 'setExported' of undefined
-    at Object.fud (/root/jshint/src/jshint.js:5199:28)
-    at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
-    at Object.exports.testES6Modules (/root/jshint/tests/unit/core.js:850:11)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate._onImmediate (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
-
-[31m✖ testES6ModulesNamedExportsAffectUnused[39m
-
-TypeError: Cannot read property 'setExported' of undefined
-    at Object.fud (/root/jshint/src/jshint.js:5199:28)
-    at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
-    at Object.exports.testES6ModulesNamedExportsAffectUnused (/root/jshint/tests/unit/core.js:936:6)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate._onImmediate (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
-
-✔ testConstRedeclaration
-✔ test typeof in TDZ
-✔ testConstModification
-[31m✖ class declaration export[39m
-
-TypeError: Cannot read property 'desc' of undefined
-    at quit (/root/jshint/src/jshint.js:333:40)
-    at Object.fud (/root/jshint/src/jshint.js:5067:13)
-    at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
-    at Object.exports.class declaration export (/root/jshint/tests/unit/core.js:1081:17)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-
-[31m✖ function declaration export[39m
 
 Assertion Message: [35m
   TestRun: [bold]{undefined}
   [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 7, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 48, Char 22} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 48, Char 25} Missing semicolon.
 [39m
 AssertionError: false == true
   TestRun: [bold]{undefined}
   [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 7, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 48, Char 22} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 48, Char 25} Missing semicolon.
 
     at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
     at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
-    at Object.exports.function declaration export (/root/jshint/tests/unit/core.js:1092:17)
+    at Object.exports.testES6Modules (/root/jshint/tests/unit/core.js:850:11)
     at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
     at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
     at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
@@ -358,6 +297,156 @@ AssertionError: false == true
     at tryOnImmediate (timers.js:743:5)
     at processImmediate [as _immediateCallback] (timers.js:714:5)
 
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 48, Char undefined} 'class' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+ [bold]{Line 59, Char undefined} 'import' is only available in ES6 (use 'esversion: 6').
+ [bold]{Line 60, Char undefined} 'import' is only available in ES6 (use 'esversion: 6').
+ [bold]{Line 65, Char undefined} 'import' is only available in ES6 (use 'esversion: 6').
+ [bold]{Line 67, Char undefined} 'export' is only available in ES6 (use 'esversion: 6').
+ [bold]{Line 67, Char undefined} 'function*' is only available in ES6 (use 'esversion: 6').
+ [bold]{Line 67, Char undefined} 'yield' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+ [bold]{Line 51, Char undefined} Attempting to override '$' which is a constant.
+ [bold]{Line 52, Char undefined} Attempting to override 'emGet' which is a constant.
+ [bold]{Line 53, Char undefined} Attempting to override 'one' which is a constant.
+ [bold]{Line 54, Char undefined} Attempting to override '_' which is a constant.
+ [bold]{Line 55, Char undefined} Attempting to override 'ember2' which is a constant.
+ [bold]{Line 58, Char undefined} 'set' has already been declared.
+ [bold]{Line 59, Char undefined} '_' has already been declared.
+ [bold]{Line 60, Char undefined} 'ember2' has already been declared.
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 4, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 5, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 6, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 7, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 8, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 9, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 10, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 11, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 22, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 26, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 30, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 31, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 32, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 36, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 40, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 44, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 46, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 47, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 48, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 48, Char 22} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 48, Char 25} Missing semicolon.
+  [bold]{Line 57, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 58, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 58, Char 17} Too many errors. (85% scanned).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 48, Char undefined} 'class' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+ [bold]{Line 59, Char undefined} 'import' is only available in ES6 (use 'esversion: 6').
+ [bold]{Line 60, Char undefined} 'import' is only available in ES6 (use 'esversion: 6').
+ [bold]{Line 65, Char undefined} 'import' is only available in ES6 (use 'esversion: 6').
+ [bold]{Line 67, Char undefined} 'export' is only available in ES6 (use 'esversion: 6').
+ [bold]{Line 67, Char undefined} 'function*' is only available in ES6 (use 'esversion: 6').
+ [bold]{Line 67, Char undefined} 'yield' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).
+ [bold]{Line 51, Char undefined} Attempting to override '$' which is a constant.
+ [bold]{Line 52, Char undefined} Attempting to override 'emGet' which is a constant.
+ [bold]{Line 53, Char undefined} Attempting to override 'one' which is a constant.
+ [bold]{Line 54, Char undefined} Attempting to override '_' which is a constant.
+ [bold]{Line 55, Char undefined} Attempting to override 'ember2' which is a constant.
+ [bold]{Line 58, Char undefined} 'set' has already been declared.
+ [bold]{Line 59, Char undefined} '_' has already been declared.
+ [bold]{Line 60, Char undefined} 'ember2' has already been declared.
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 4, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 5, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 6, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 7, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 8, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 9, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 10, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 11, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 22, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 26, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 30, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 31, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 32, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 36, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 40, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 44, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 46, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 47, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 48, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
+  [bold]{Line 48, Char 22} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 48, Char 25} Missing semicolon.
+  [bold]{Line 57, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 58, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
+  [bold]{Line 58, Char 17} Too many errors. (85% scanned).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.testES6Modules (/root/jshint/tests/unit/core.js:885:11)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+{"identifier":true,"type":"export","value":"export","line":9,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":10,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":11,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":12,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":13,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":14,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":15,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":16,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":17,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":18,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":19,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":20,"character":7,"from":1,"raw_text":"export"}
+✔ testES6ModulesNamedExportsAffectUnused
+✔ testConstRedeclaration
+✔ test typeof in TDZ
+✔ testConstModification
+{"identifier":true,"type":"class","value":"class","line":1,"character":6,"from":1,"raw_text":"class"}
+[31m✖ class declaration export[39m
+
+TypeError: Cannot read property 'desc' of undefined
+    at quit (/root/jshint/src/jshint.js:333:40)
+    at Object.fud (/root/jshint/src/jshint.js:5070:13)
+    at expression (/root/jshint/src/jshint.js:961:32)
+    at statement (/root/jshint/src/jshint.js:2001:9)
+    at statements (/root/jshint/src/jshint.js:2054:16)
+    at itself (/root/jshint/src/jshint.js:5888:9)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+    at Object.exports.class declaration export (/root/jshint/tests/unit/core.js:1081:17)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+
+{"identifier":true,"type":"export","value":"export","line":1,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":7,"character":7,"from":1,"raw_text":"export"}
+✔ function declaration export
+{"identifier":true,"type":"class","value":"class","line":2,"character":6,"from":1,"raw_text":"class"}
+{"identifier":true,"type":"class","value":"class","line":3,"character":6,"from":1,"raw_text":"class"}
+{"identifier":true,"type":"class","value":"class","line":4,"character":6,"from":1,"raw_text":"class"}
+{"identifier":true,"type":"class","value":"class","line":11,"character":8,"from":3,"raw_text":"class"}
 [31m✖ classIsBlockScoped[39m
 
 Assertion Message: [35m
@@ -365,11 +454,8 @@ Assertion Message: [35m
   [yellow]{Errors defined, but not thrown by JSHINT}
  [bold]{Line 4, Char undefined} 'C' was used before it was declared, which is illegal for 'class' variables.
   [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
   [bold]{Line 2, Char 11} Missing semicolon.
-  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
   [bold]{Line 3, Char 21} Missing semicolon.
-  [bold]{Line 4, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
   [bold]{Line 4, Char 11} Missing semicolon.
   [bold]{Line 6, Char 14} Missing semicolon.
   [bold]{Line 6, Char 15} Expected an assignment or function call and instead saw an expression.
@@ -377,7 +463,6 @@ Assertion Message: [35m
   [bold]{Line 6, Char 33} Missing semicolon.
   [bold]{Line 7, Char 11} Missing semicolon.
   [bold]{Line 8, Char 2} Unnecessary semicolon.
-  [bold]{Line 11, Char 3} Expected an identifier and instead saw 'class' (a reserved word).
   [bold]{Line 11, Char 13} Missing semicolon.
   [bold]{Line 6, Char 15} 'D' is not defined.
   [bold]{Line 6, Char 36} 'D' is not defined.
@@ -390,11 +475,8 @@ AssertionError: false == true
   [yellow]{Errors defined, but not thrown by JSHINT}
  [bold]{Line 4, Char undefined} 'C' was used before it was declared, which is illegal for 'class' variables.
   [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
   [bold]{Line 2, Char 11} Missing semicolon.
-  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
   [bold]{Line 3, Char 21} Missing semicolon.
-  [bold]{Line 4, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
   [bold]{Line 4, Char 11} Missing semicolon.
   [bold]{Line 6, Char 14} Missing semicolon.
   [bold]{Line 6, Char 15} Expected an assignment or function call and instead saw an expression.
@@ -402,7 +484,6 @@ AssertionError: false == true
   [bold]{Line 6, Char 33} Missing semicolon.
   [bold]{Line 7, Char 11} Missing semicolon.
   [bold]{Line 8, Char 2} Unnecessary semicolon.
-  [bold]{Line 11, Char 3} Expected an identifier and instead saw 'class' (a reserved word).
   [bold]{Line 11, Char 13} Missing semicolon.
   [bold]{Line 6, Char 15} 'D' is not defined.
   [bold]{Line 6, Char 36} 'D' is not defined.
@@ -426,107 +507,26 @@ AssertionError: false == true
     at tryOnImmediate (timers.js:743:5)
     at processImmediate [as _immediateCallback] (timers.js:714:5)
 
-[31m✖ testES6ModulesNamedExportsAffectUndef[39m
-
-Assertion Message: [35m
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-[39m
-AssertionError: false == true
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-
-    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
-    at Object.exports.testES6ModulesNamedExportsAffectUndef (/root/jshint/tests/unit/core.js:1143:6)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:781:20)
-    at tryOnImmediate (timers.js:743:5)
-    at processImmediate [as _immediateCallback] (timers.js:714:5)
-
-[31m✖ testES6ModulesThroughExportDoNotAffectUnused[39m
-
-Assertion Message: [35m
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-[39m
-AssertionError: false == true
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-
-    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
-    at Object.exports.testES6ModulesThroughExportDoNotAffectUnused (/root/jshint/tests/unit/core.js:1167:6)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:781:20)
-    at tryOnImmediate (timers.js:743:5)
-    at processImmediate [as _immediateCallback] (timers.js:714:5)
-
-[31m✖ testES6ModulesThroughExportDoNotAffectUndef[39m
-
-Assertion Message: [35m
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-[39m
-AssertionError: false == true
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-
-    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
-    at Object.exports.testES6ModulesThroughExportDoNotAffectUndef (/root/jshint/tests/unit/core.js:1191:6)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:781:20)
-    at tryOnImmediate (timers.js:743:5)
-    at processImmediate [as _immediateCallback] (timers.js:714:5)
-
+{"identifier":true,"type":"export","value":"export","line":1,"character":7,"from":1,"raw_text":"export"}
+✔ testES6ModulesNamedExportsAffectUndef
+{"identifier":true,"type":"export","value":"export","line":2,"character":7,"from":1,"raw_text":"export"}
+✔ testES6ModulesThroughExportDoNotAffectUnused
+{"identifier":true,"type":"export","value":"export","line":1,"character":7,"from":1,"raw_text":"export"}
+✔ testES6ModulesThroughExportDoNotAffectUndef
+{"identifier":true,"type":"export","value":"export","line":7,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":8,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":9,"character":7,"from":1,"raw_text":"export"}
 [31m✖ testES6ModulesDefaultExportsAffectUnused[39m
 
 Assertion Message: [35m
   TestRun: [bold]{undefined}
   [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 7, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 8, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 9, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
   [bold]{Line 9, Char 22} Expected an assignment or function call and instead saw an expression.
   [bold]{Line 9, Char 29} Missing semicolon.
 [39m
 AssertionError: false == true
   TestRun: [bold]{undefined}
   [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 7, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 8, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 9, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
   [bold]{Line 9, Char 22} Expected an assignment or function call and instead saw an expression.
   [bold]{Line 9, Char 29} Missing semicolon.
 
@@ -546,62 +546,10 @@ AssertionError: false == true
     at tryOnImmediate (timers.js:743:5)
     at processImmediate [as _immediateCallback] (timers.js:714:5)
 
-[31m✖ testES6ModulesDefaultExportAssignmentExpr[39m
-
-Assertion Message: [35m
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-[39m
-AssertionError: false == true
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-
-    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
-    at Object.exports.testES6ModulesDefaultExportAssignmentExpr (/root/jshint/tests/unit/core.js:1231:6)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:781:20)
-    at tryOnImmediate (timers.js:743:5)
-    at processImmediate [as _immediateCallback] (timers.js:714:5)
-
-[31m✖ testES6ModulesNameSpaceImportsAffectUnused[39m
-
-Assertion Message: [35m
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
-[39m
-AssertionError: false == true
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'import' (a reserved word).
-
-    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
-    at Object.exports.testES6ModulesNameSpaceImportsAffectUnused (/root/jshint/tests/unit/core.js:1243:6)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:781:20)
-    at tryOnImmediate (timers.js:743:5)
-    at processImmediate [as _immediateCallback] (timers.js:714:5)
-
+{"identifier":true,"type":"export","value":"export","line":2,"character":7,"from":1,"raw_text":"export"}
+✔ testES6ModulesDefaultExportAssignmentExpr
+{"identifier":true,"type":"import","value":"import","line":1,"character":7,"from":1,"raw_text":"import"}
+✔ testES6ModulesNameSpaceImportsAffectUnused
 ✔ testES6TemplateLiterals
 ✔ testES6TaggedTemplateLiterals
 ✔ testES6TemplateLiteralsUnused
@@ -616,38 +564,10 @@ AssertionError: false == true
 ✔ testES6TemplateLiteralMultilineReturnValueWithFunctionCall
 ✔ testES6TaggedTemplateLiteralMultilineReturnValueWithFunctionCall
 ✔ testMultilineReturnValueStringLiteral
-[31m✖ testES6ExportStarFrom[39m
-
-Assertion Message: [35m
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-[39m
-AssertionError: false == true
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 1, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 2, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'export' (a reserved word).
-
-    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
-    at Object.exports.testES6ExportStarFrom (/root/jshint/tests/unit/core.js:1499:6)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:781:20)
-    at tryOnImmediate (timers.js:743:5)
-    at processImmediate [as _immediateCallback] (timers.js:714:5)
-
+{"identifier":true,"type":"export","value":"export","line":1,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":2,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":3,"character":7,"from":1,"raw_text":"export"}
+✔ testES6ExportStarFrom
 ✔ testPotentialVariableLeak
 ✔ testDefaultArguments
 ✔ testDuplicateParamNames
@@ -704,15 +624,24 @@ AssertionError: false == true
 ✔ gh-2838
 ✔ destructuring in setter parameter
 ✔ TDZ within initializer of lexical declarations
+{"identifier":true,"type":"extends","value":"extends","line":1,"character":22,"from":15,"raw_text":"extends"}
+{"identifier":true,"type":"extends","value":"extends","line":2,"character":22,"from":15,"raw_text":"extends"}
+{"identifier":true,"type":"extends","value":"extends","line":3,"character":22,"from":15,"raw_text":"extends"}
+{"identifier":true,"type":"extends","value":"extends","line":4,"character":24,"from":17,"raw_text":"extends"}
+{"identifier":true,"type":"extends","value":"extends","line":5,"character":24,"from":17,"raw_text":"extends"}
+{"identifier":true,"type":"extends","value":"extends","line":6,"character":24,"from":17,"raw_text":"extends"}
+{"identifier":true,"type":"class","value":"class","line":7,"character":6,"from":1,"raw_text":"class"}
+{"identifier":true,"type":"class","value":"class","line":8,"character":6,"from":1,"raw_text":"class"}
+{"identifier":true,"type":"class","value":"class","line":9,"character":6,"from":1,"raw_text":"class"}
 [31m✖ TDZ within class heritage definition[39m
 
 TypeError: Cannot read property 'desc' of undefined
     at quit (/root/jshint/src/jshint.js:333:40)
-    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at Object.fud (/root/jshint/src/jshint.js:5070:13)
     at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
+    at statement (/root/jshint/src/jshint.js:2001:9)
+    at statements (/root/jshint/src/jshint.js:2054:16)
+    at itself (/root/jshint/src/jshint.js:5888:9)
     at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
     at Object.exports.TDZ within class heritage definition (/root/jshint/tests/unit/core.js:2199:6)
     at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
@@ -742,26 +671,31 @@ TypeError: Cannot read property 'desc' of undefined
 ✔ shadowouter
 ✔ shadowInline
 ✔ shadowEs6
-[31m✖ latedef[39m
-
-TypeError: Cannot read property 'setExported' of undefined
-    at Object.fud (/root/jshint/src/jshint.js:5199:28)
-    at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
-    at Object.exports.latedef (/root/jshint/tests/unit/options.js:219:8)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate._onImmediate (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
-
+{"identifier":true,"type":"export","value":"export","line":65,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":66,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":67,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":68,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":69,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"import","value":"import","line":75,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":76,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":77,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"export","value":"export","line":65,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":66,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":67,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":68,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":69,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"import","value":"import","line":75,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":76,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":77,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"export","value":"export","line":65,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":66,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":67,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":68,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":69,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"import","value":"import","line":75,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":76,"character":7,"from":1,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":77,"character":7,"from":1,"raw_text":"import"}
+✔ latedef
 ✔ latedefInline
 ✔ notypeof
 ✔ combination of latedef and undef
@@ -1056,6 +990,7 @@ AssertionError: false == true
 
 ✔ module - declarationRestrictions
 ✔ module - newcap
+{"identifier":true,"type":"await","value":"await","line":1,"character":6,"from":1,"raw_text":"await"}
 [31m✖ module - await[39m
 
 Assertion Message: [35m
@@ -1112,6 +1047,44 @@ AssertionError: false == true
     at tryOnImmediate (timers.js:743:5)
     at processImmediate [as _immediateCallback] (timers.js:714:5)
 
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'await' (a reserved word).
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 1} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 1, Char 6} Missing semicolon.
+  [bold]{Line 1, Char 1} Unrecoverable syntax error. (100% scanned).
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors defined, but not thrown by JSHINT}
+ [bold]{Line 1, Char undefined} Expected an identifier and instead saw 'await' (a reserved word).
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 1, Char 1} Expected an assignment or function call and instead saw an expression.
+  [bold]{Line 1, Char 6} Missing semicolon.
+  [bold]{Line 1, Char 1} Unrecoverable syntax error. (100% scanned).
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
+    at Object.exports.module.await (/root/jshint/tests/unit/options.js:3896:6)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
+    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
+    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
+    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
+    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
+    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
+    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+
+{"identifier":true,"type":"class","value":"class","line":3,"character":6,"from":1,"raw_text":"class"}
+{"identifier":true,"type":"class","value":"class","line":3,"character":6,"from":1,"raw_text":"class"}
+{"identifier":true,"type":"class","value":"class","line":3,"character":6,"from":1,"raw_text":"class"}
 [31m✖ esversion[39m
 
 Assertion Message: [35m
@@ -1175,13 +1148,11 @@ AssertionError: false == true
 Assertion Message: [35m
   TestRun: [bold]{compatible option specified in-line}
   [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
   [bold]{Line 3, Char 11} Missing semicolon.
 [39m
 AssertionError: false == true
   TestRun: [bold]{compatible option specified in-line}
   [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 3, Char 1} Expected an identifier and instead saw 'class' (a reserved word).
   [bold]{Line 3, Char 11} Missing semicolon.
 
     at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
@@ -1241,6 +1212,7 @@ AssertionError: false == true
 ✔ badAssignments
 ✔ withStatement
 ✔ blocks
+{"identifier":true,"type":"export","value":"export","line":76,"character":7,"from":1,"raw_text":"export"}
 [31m✖ functionCharacterLocation[39m
 
 AssertionError: 34 == 27
@@ -1600,15 +1572,18 @@ TypeError: Cannot read property 'name' of undefined
 ✔ spread & rest operator support
 ✔ parameter destructuring with rest
 ✔ test for GH-1010
+{"identifier":true,"type":"class","value":"class","line":3,"character":6,"from":1,"raw_text":"class"}
+{"identifier":true,"type":"class","value":"class","line":4,"character":6,"from":1,"raw_text":"class"}
+{"identifier":true,"type":"class","value":"class","line":5,"character":6,"from":1,"raw_text":"class"}
 [31m✖ classes[39m
 
 TypeError: Cannot read property 'desc' of undefined
     at quit (/root/jshint/src/jshint.js:333:40)
-    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at Object.fud (/root/jshint/src/jshint.js:5070:13)
     at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
+    at statement (/root/jshint/src/jshint.js:2001:9)
+    at statements (/root/jshint/src/jshint.js:2054:16)
+    at itself (/root/jshint/src/jshint.js:5888:9)
     at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
     at Object.exports.classes (/root/jshint/tests/unit/parser.js:6153:7)
     at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
@@ -1620,15 +1595,18 @@ TypeError: Cannot read property 'desc' of undefined
     at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
     at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
 
+{"identifier":true,"type":"class","value":"class","line":1,"character":6,"from":1,"raw_text":"class"}
+{"identifier":true,"type":"class","value":"class","line":2,"character":6,"from":1,"raw_text":"class"}
+{"identifier":true,"type":"class","value":"class","line":3,"character":6,"from":1,"raw_text":"class"}
 [31m✖ class and method naming[39m
 
 TypeError: Cannot read property 'desc' of undefined
     at quit (/root/jshint/src/jshint.js:333:40)
-    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at Object.fud (/root/jshint/src/jshint.js:5070:13)
     at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
+    at statement (/root/jshint/src/jshint.js:2001:9)
+    at statements (/root/jshint/src/jshint.js:2054:16)
+    at itself (/root/jshint/src/jshint.js:5888:9)
     at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
     at Object.exports.class and method naming (/root/jshint/tests/unit/parser.js:6250:7)
     at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
@@ -1640,15 +1618,16 @@ TypeError: Cannot read property 'desc' of undefined
     at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
     at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
 
+{"identifier":true,"type":"class","value":"class","line":2,"character":6,"from":1,"raw_text":"class"}
 [31m✖ computed class methods aren't duplicate[39m
 
 TypeError: Cannot read property 'desc' of undefined
     at quit (/root/jshint/src/jshint.js:333:40)
-    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at Object.fud (/root/jshint/src/jshint.js:5070:13)
     at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
+    at statement (/root/jshint/src/jshint.js:2001:9)
+    at statements (/root/jshint/src/jshint.js:2054:16)
+    at itself (/root/jshint/src/jshint.js:5888:9)
     at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
     at Object.exports.computed class methods aren't duplicate (/root/jshint/tests/unit/parser.js:6272:17)
     at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
@@ -1660,15 +1639,16 @@ TypeError: Cannot read property 'desc' of undefined
     at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
     at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
 
+{"identifier":true,"type":"class","value":"class","line":1,"character":6,"from":1,"raw_text":"class"}
 [31m✖ class method this[39m
 
 TypeError: Cannot read property 'desc' of undefined
     at quit (/root/jshint/src/jshint.js:333:40)
-    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at Object.fud (/root/jshint/src/jshint.js:5070:13)
     at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
+    at statement (/root/jshint/src/jshint.js:2001:9)
+    at statements (/root/jshint/src/jshint.js:2054:16)
+    at itself (/root/jshint/src/jshint.js:5888:9)
     at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
     at Object.exports.class method this (/root/jshint/tests/unit/parser.js:6294:6)
     at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
@@ -1680,15 +1660,16 @@ TypeError: Cannot read property 'desc' of undefined
     at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
     at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
 
+{"identifier":true,"type":"class","value":"class","line":1,"character":6,"from":1,"raw_text":"class"}
 [31m✖ classNewcap[39m
 
 TypeError: Cannot read property 'desc' of undefined
     at quit (/root/jshint/src/jshint.js:333:40)
-    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at Object.fud (/root/jshint/src/jshint.js:5070:13)
     at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
+    at statement (/root/jshint/src/jshint.js:2001:9)
+    at statements (/root/jshint/src/jshint.js:2054:16)
+    at itself (/root/jshint/src/jshint.js:5888:9)
     at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
     at Object.exports.classNewcap (/root/jshint/tests/unit/parser.js:6312:6)
     at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
@@ -1862,15 +1843,16 @@ AssertionError: false == true
     at tryOnImmediate (timers.js:743:5)
     at processImmediate [as _immediateCallback] (timers.js:714:5)
 
+{"identifier":true,"type":"class","value":"class","line":1,"character":6,"from":1,"raw_text":"class"}
 [31m✖ classElementEmpty[39m
 
 TypeError: Cannot read property 'desc' of undefined
     at quit (/root/jshint/src/jshint.js:333:40)
-    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at Object.fud (/root/jshint/src/jshint.js:5070:13)
     at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
+    at statement (/root/jshint/src/jshint.js:2001:9)
+    at statements (/root/jshint/src/jshint.js:2054:16)
+    at itself (/root/jshint/src/jshint.js:5888:9)
     at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
     at Object.exports.classElementEmpty (/root/jshint/tests/unit/parser.js:6420:6)
     at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
@@ -1882,15 +1864,16 @@ TypeError: Cannot read property 'desc' of undefined
     at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
     at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
 
+{"identifier":true,"type":"class","value":"class","line":1,"character":6,"from":1,"raw_text":"class"}
 [31m✖ invalidClasses[39m
 
 TypeError: Cannot read property 'desc' of undefined
     at quit (/root/jshint/src/jshint.js:333:40)
-    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at Object.fud (/root/jshint/src/jshint.js:5070:13)
     at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
+    at statement (/root/jshint/src/jshint.js:2001:9)
+    at statements (/root/jshint/src/jshint.js:2054:16)
+    at itself (/root/jshint/src/jshint.js:5888:9)
     at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
     at Object.exports.invalidClasses (/root/jshint/tests/unit/parser.js:6430:6)
     at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
@@ -1941,15 +1924,28 @@ TypeError: Cannot read property 'desc' of undefined
 ✔ enforcement of `forin` option should be tolerant of invalid syntax
 ✔ Ignore strings containing braces within array literal declarations
 ✔ gh-1016: don't issue W088 if identifier is outside of blockscope
+{"identifier":true,"type":"export","value":"export","line":1,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"class","value":"class","line":10,"character":6,"from":1,"raw_text":"class"}
+{"identifier":true,"type":"export","value":"export","line":11,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":12,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":13,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":14,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":15,"character":7,"from":1,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":16,"character":7,"from":1,"raw_text":"export"}
 [31m✖ testES6UnusedExports[39m
 
-TypeError: Cannot read property 'setExported' of undefined
-    at Object.fud (/root/jshint/src/jshint.js:5199:28)
-    at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
+Assertion Message: [35m
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 10, Char 27} Missing semicolon.
+[39m
+AssertionError: false == true
+  TestRun: [bold]{undefined}
+  [yellow]{Errors thrown by JSHINT, but not defined in test run}
+  [bold]{Line 10, Char 27} Missing semicolon.
+
+    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
+    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
     at Object.exports.testES6UnusedExports (/root/jshint/tests/unit/parser.js:7465:6)
     at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
     at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
@@ -1959,88 +1955,27 @@ TypeError: Cannot read property 'setExported' of undefined
     at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
     at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
     at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate._onImmediate (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
-
-[31m✖ testES6BlockExports[39m
-
-Assertion Message: [35m
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 4, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 5, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 6, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 7, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 8, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 14, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 15, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 16, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 17, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 18, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-[39m
-AssertionError: false == true
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 4, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 5, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 6, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 7, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 8, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 14, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 15, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 16, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 17, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-  [bold]{Line 18, Char 3} Expected an identifier and instead saw 'export' (a reserved word).
-
-    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
-    at Object.exports.testES6BlockExports (/root/jshint/tests/unit/parser.js:7511:6)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
     at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
     at runCallback (timers.js:781:20)
     at tryOnImmediate (timers.js:743:5)
     at processImmediate [as _immediateCallback] (timers.js:714:5)
 
-[31m✖ testES6BlockImports[39m
-
-Assertion Message: [35m
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 2, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
-  [bold]{Line 5, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
-  [bold]{Line 8, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
-  [bold]{Line 11, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
-[39m
-AssertionError: false == true
-  TestRun: [bold]{undefined}
-  [yellow]{Errors thrown by JSHINT, but not defined in test run}
-  [bold]{Line 2, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
-  [bold]{Line 5, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
-  [bold]{Line 8, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
-  [bold]{Line 11, Char 2} Expected an identifier and instead saw 'import' (a reserved word).
-
-    at Object.ok (/root/jshint/node_modules/nodeunit/lib/types.js:83:39)
-    at Object.test (/root/jshint/tests/helpers/testhelper.js:133:12)
-    at Object.exports.testES6BlockImports (/root/jshint/tests/unit/parser.js:7538:6)
-    at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:236:16
-    at Object.exports.runTest (/root/jshint/node_modules/nodeunit/lib/core.js:70:9)
-    at /root/jshint/node_modules/nodeunit/lib/core.js:118:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:513:13
-    at iterate (/root/jshint/node_modules/nodeunit/deps/async.js:123:13)
-    at /root/jshint/node_modules/nodeunit/deps/async.js:134:25
-    at /root/jshint/node_modules/nodeunit/deps/async.js:515:17
-    at Immediate.<anonymous> (/root/jshint/node_modules/nodeunit/lib/types.js:146:17)
-    at runCallback (timers.js:781:20)
-    at tryOnImmediate (timers.js:743:5)
-    at processImmediate [as _immediateCallback] (timers.js:714:5)
-
+{"identifier":true,"type":"export","value":"export","line":4,"character":9,"from":3,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":5,"character":9,"from":3,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":6,"character":9,"from":3,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":7,"character":9,"from":3,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":8,"character":9,"from":3,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":14,"character":9,"from":3,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":15,"character":9,"from":3,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":16,"character":9,"from":3,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":17,"character":9,"from":3,"raw_text":"export"}
+{"identifier":true,"type":"export","value":"export","line":18,"character":9,"from":3,"raw_text":"export"}
+✔ testES6BlockExports
+{"identifier":true,"type":"import","value":"import","line":2,"character":8,"from":2,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":5,"character":8,"from":2,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":8,"character":8,"from":2,"raw_text":"import"}
+{"identifier":true,"type":"import","value":"import","line":11,"character":8,"from":2,"raw_text":"import"}
+✔ testES6BlockImports
 ✔ testStrictDirectiveASI
 ✔ dereferenceDelete
 ✔ trailingCommaInObjectBindingPattern
@@ -2105,15 +2040,16 @@ AssertionError: false == true
 ✔ invalidParams
 ✔ functionKeyword
 ✔ nonGeneratorAfterGenerator
+{"identifier":true,"type":"class","value":"class","line":1,"character":6,"from":1,"raw_text":"class"}
 [31m✖ new.target[39m
 
 TypeError: Cannot read property 'desc' of undefined
     at quit (/root/jshint/src/jshint.js:333:40)
-    at Object.fud (/root/jshint/src/jshint.js:5067:13)
+    at Object.fud (/root/jshint/src/jshint.js:5070:13)
     at expression (/root/jshint/src/jshint.js:961:32)
-    at statement (/root/jshint/src/jshint.js:1998:9)
-    at statements (/root/jshint/src/jshint.js:2051:16)
-    at itself (/root/jshint/src/jshint.js:5885:9)
+    at statement (/root/jshint/src/jshint.js:2001:9)
+    at statements (/root/jshint/src/jshint.js:2054:16)
+    at itself (/root/jshint/src/jshint.js:5888:9)
     at Object.test (/root/jshint/tests/helpers/testhelper.js:54:19)
     at Object.exports.new.target (/root/jshint/tests/unit/parser.js:7963:6)
     at Object.<anonymous> (/root/jshint/node_modules/nodeunit/lib/core.js:236:16)
@@ -2169,4 +2105,4 @@ AssertionError: false == true
 ✔ spread
 ✔ rest
 
-[1m[31mFAILURES: [39m[22m60/1087 assertions failed (21457ms)
+[1m[31mFAILURES: [39m[22m49/1090 assertions failed (16387ms)
