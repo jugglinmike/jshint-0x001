@@ -1288,7 +1288,7 @@ var JSHINT = (function() {
    * Convenience function for defining JSHint symbols for keywords that are
    * only reserved in some circumstances.
    *
-   * @param {string} s - the name of the symbol
+   * @param {string} name - the name of the symbol
    * @param {object} [meta] - a collection of optional arguments
    * @param {function} [meta.nud] -the null denotation function for the symbol;
    *                   see the `expression` function for more detail
@@ -1775,7 +1775,7 @@ var JSHINT = (function() {
 
     var curr = state.tokens.curr;
     var val  = state.tokens.curr.value;
-    
+
     if (!isReserved(curr)) {
       return val;
     }
@@ -1790,11 +1790,10 @@ var JSHINT = (function() {
       return val;
     }
 
-    if (curr.identifier) {
+    if (curr.identifier && !isReserved(curr)) {
       return val;
     }
 
-     
     warning("W024", state.tokens.curr, state.tokens.curr.id);
     return val;
   }
@@ -1945,9 +1944,10 @@ var JSHINT = (function() {
     var res = isReserved(t);
 
     // We're being more tolerant here: if someone uses
-    // a FutureReservedWord as a label, we warn but proceed
-    // anyway.
-    if (res && t.meta && t.meta.isFutureReservedWord) {
+    // a FutureReservedWord (that is not meant to start a statement)
+    // as a label, we warn but proceed anyway.
+
+    if (res && t.meta && t.meta.isFutureReservedWord && !t.fud) {
       warning("W024", t, t.id);
       res = false;
     }
@@ -2759,12 +2759,15 @@ var JSHINT = (function() {
     }
     // Class Declaration
     if (state.tokens.next.identifier) {
-      this.name = identifier();
-      state.funct["(scope)"].addlabel(this.name, {
-        type: "class",
-        initialized: true,
-        token: state.tokens.curr
-      });
+      const name = identifier();
+      this.name = name;
+      if (context & 4) {
+        state.funct["(scope)"].addlabel(name, {
+          type: "class",
+          initialized: true,
+          token: state.tokens.curr
+        });
+      }
 
       if (state.tokens.next.value === "extends") {
         advance("extends");
@@ -2794,23 +2797,23 @@ var JSHINT = (function() {
           var type = state.tokens.next.value;
           advance();
           if (!state.tokens.next.identifier) { 
-            quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
+            //quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
           } else {
             advance();
             saveAccessor(state.tokens.curr.value, props, state.tokens.next.value, state.tokens.next, true, is_static);
             is_static = false;
             advance();
-            state.syntax["function"].fud();
+            state.syntax["function"].nud();
           }
           break;
         default:
-          if (!state.tokens.next.identifier) {
-            quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
+          if (!state.tokens.curr.identifier) {
+            //quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
             break;
           } else {
-            saveProperty(props, state.tokens.next.value, state.tokens.next, true, is_static);
+            saveProperty(props, state.tokens.curr.value, state.tokens.curr, true, is_static);
             is_static = false;
-            state.syntax["function"].fud();
+            state.syntax["function"].nud();
           }
           
       } 
@@ -2819,8 +2822,6 @@ var JSHINT = (function() {
     return this;
   }
   
-  prefix("class", doClassInternals);
-
   prefix("void").exps = true;
 
   infix(".", function(context, left, that) {
@@ -4215,6 +4216,10 @@ var JSHINT = (function() {
       if (state.tokens.next.id === "=") {
         this.hasInitializer = true;
 
+        if (state.tokens.curr.reserved) {
+
+        }
+
         state.nameStack.set(state.tokens.curr);
 
         advance("=");
@@ -4388,7 +4393,6 @@ var JSHINT = (function() {
       advance(")");
 
       block(context, false);
-
       state.funct["(scope)"].unstack();
     }
 
@@ -4679,7 +4683,7 @@ var JSHINT = (function() {
 
       //checkLeftSideAssign(target, nextop);
 
-      // In the event of a syntax error, do no issue warnings regarding the
+      // In the event of a syntax error, do not issue warnings regarding the
       // implicit creation of bindings.
       if (!initializer && !comma) {
         targets.forEach(function(token) {
@@ -5242,6 +5246,8 @@ var JSHINT = (function() {
   FutureReservedWord("synchronized");
   FutureReservedWord("transient");
   FutureReservedWord("volatile");
+
+  prefix("class", doClassInternals);
 
   // this function is used to determine whether a squarebracket or a curlybracket
   // expression is a comprehension array, destructuring assignment or a json value.
