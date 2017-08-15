@@ -2753,15 +2753,16 @@ var JSHINT = (function() {
   state.syntax["new"].exps = true;
 
   
-  const doClassInternals = function(context) {
+  var doClassInternals = function(context) {
     if (!state.inES6()) {
       warning("W104", state.tokens.curr, "class", "6");
     }
     // Class Declaration
     if (state.tokens.next.identifier) {
-      const name = identifier();
+      var prev = state.tokens.prev.value;
+      var name = identifier();
       this.name = name;
-      if (context & 4) {
+      if (prev !== "default") {
         state.funct["(scope)"].addlabel(name, {
           type: "class",
           initialized: true,
@@ -2777,7 +2778,7 @@ var JSHINT = (function() {
 
     // Class Expression
     } else if (state.tokens.next.value === "{") {
-      advance("{")
+      advance("{");
     } else {
       warning("W116", state.tokens.curr, "identifier", state.tokens.next.type);
       advance();
@@ -4216,10 +4217,6 @@ var JSHINT = (function() {
       if (state.tokens.next.id === "=") {
         this.hasInitializer = true;
 
-        if (state.tokens.curr.reserved) {
-
-        }
-
         state.nameStack.set(state.tokens.curr);
 
         advance("=");
@@ -4630,7 +4627,7 @@ var JSHINT = (function() {
     var headContext = context | prodParams.noin;
 
     if (state.tokens.next.id === "var") {
-      advance("var");
+      dvance("var");
       decl = state.tokens.curr.fud(headContext);
       comma = decl.hasComma ? decl : null;
       initializer = decl.hasInitializer ? decl : null;
