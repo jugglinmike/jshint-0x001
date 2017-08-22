@@ -2758,24 +2758,20 @@ var JSHINT = (function() {
       warning("W104", state.tokens.curr, "class", "6");
     }
     // Class Declaration
-    if (state.tokens.next.identifier) {
+    if (state.tokens.next.identifier && state.tokens.next.value !== "extends") {
       var prev = state.tokens.prev.value;
       var name = identifier();
-      this.name = name;
-      if (prev !== "default") {
-        state.funct["(scope)"].addlabel(name, {
-          type: "class",
-          initialized: true,
-          token: state.tokens.curr
-        });
-      }
-
       if (state.tokens.next.value === "extends") {
         advance("extends");
-        identifier();
+        expression(0, state.tokens.next);
       }
       advance("{");
 
+    // Class Expression with exteends
+    } else if (state.tokens.next.value === "extends") {
+      advance("extends");
+      expression(0, state.tokens.next);
+      advance("{")
     // Class Expression
     } else if (state.tokens.next.value === "{") {
       advance("{");
@@ -2783,7 +2779,15 @@ var JSHINT = (function() {
       warning("W116", state.tokens.curr, "identifier", state.tokens.next.type);
       advance();
     }
-
+    if (prev !== "default") {
+      this.name = name; 
+      state.funct["(scope)"].addlabel(name, {
+        type: "class",
+        initialized: true,
+        token: state.tokens.curr
+      });
+    }
+    state.funct["(scope)"].stack();
     var is_static = false;
     var props = {};
     while (state.tokens.next.value !== "}") {
@@ -2801,7 +2805,7 @@ var JSHINT = (function() {
             //quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
           } else {
             advance();
-            saveAccessor(state.tokens.curr.value, props, state.tokens.next.value, state.tokens.next, true, is_static);
+            //saveAccessor(state.tokens.curr.value, props, state.tokens.next.value, state.tokens.next, true, is_static);
             is_static = false;
             advance();
             state.syntax["function"].nud();
@@ -2812,7 +2816,7 @@ var JSHINT = (function() {
             //quit("W116", state.tokens.curr, "identifier", state.tokens.next.type);
             break;
           } else {
-            saveProperty(props, state.tokens.curr.value, state.tokens.curr, true, is_static);
+            //saveProperty(props, state.tokens.curr.value, state.tokens.curr, true, is_static);
             is_static = false;
             state.syntax["function"].nud();
           }
@@ -2820,6 +2824,7 @@ var JSHINT = (function() {
       } 
     }
     advance("}");
+    state.funct["(scope)"].unstack();
     return this;
   }
   
@@ -4627,7 +4632,7 @@ var JSHINT = (function() {
     var headContext = context | prodParams.noin;
 
     if (state.tokens.next.id === "var") {
-      dvance("var");
+      advance("var");
       decl = state.tokens.curr.fud(headContext);
       comma = decl.hasComma ? decl : null;
       initializer = decl.hasInitializer ? decl : null;
