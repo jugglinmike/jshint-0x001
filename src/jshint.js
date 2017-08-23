@@ -2751,14 +2751,19 @@ var JSHINT = (function() {
     return this;
   });
   state.syntax["new"].exps = true;
-
   
   var doClassInternals = function(context) {
     if (!state.inES6()) {
       warning("W104", state.tokens.curr, "class", "6");
     }
+    var def_token = state.tokens.next;
+    var declare_within_declare = false;
+    if (state.tokens.prev.value === "=") {
+      declare_within_declare = true;
+      console.log("IT'S DWD")
+    }
     // Class Declaration
-    if (state.tokens.next.identifier && state.tokens.next.value !== "extends") {
+    if (state.tokens.next.identifier && state.tokens.next.value !== "extends" && state.tokens.prev.value !== "=") {
       var prev = state.tokens.prev.value;
       var name = identifier();
       if (state.tokens.next.value === "extends") {
@@ -2766,28 +2771,38 @@ var JSHINT = (function() {
         expression(0, state.tokens.next);
       }
       advance("{");
-
+      
     // Class Expression with exteends
     } else if (state.tokens.next.value === "extends") {
       advance("extends");
       expression(0, state.tokens.next);
       advance("{")
-    // Class Expression
+    // Class Expression without optional identifier
     } else if (state.tokens.next.value === "{") {
       advance("{");
-    } else {
+    } else if (state.tokens.prev.value === "=") {
+      expression(0, state.tokens.next);
+      advance("{");
+    } else {  
       warning("W116", state.tokens.curr, "identifier", state.tokens.next.type);
       advance();
     }
-    if (prev !== "default") {
-      this.name = name; 
-      state.funct["(scope)"].addlabel(name, {
+    if (prev !== "default" && !declare_within_declare) {
+      this.name = def_token.value; 
+      state.funct["(scope)"].addlabel(def_token.value, {
         type: "class",
         initialized: true,
-        token: state.tokens.curr
+        token: def_token
       });
     }
     state.funct["(scope)"].stack();
+    if (declare_within_declare) {
+      state.funct["(scope)"].addlabel(def_token.value, {
+        type: "class",
+        initialized: true,
+        token: def_token
+      })
+    }
     var is_static = false;
     var props = {};
     while (state.tokens.next.value !== "}") {
