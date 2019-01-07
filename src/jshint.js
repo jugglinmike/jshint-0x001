@@ -2338,9 +2338,7 @@ var JSHINT = (function() {
     }
   });
   reservevar("super", function(x) {
-    if (!state.inClassBody && !state.inObjectBody && !isMethod()) {
-      error("E024", x, x.value);
-    }
+    superNud.call(state.tokens.curr, x);
   });
 
   assignop("=", "assign", 20);
@@ -2683,74 +2681,77 @@ var JSHINT = (function() {
   });
   state.syntax["new"].exps = true;
 
-  function classHeader() {
-    var classNameToken;
-    if (!state.inES6()) {
-      warning("W104", state.tokens.curr, "class", "6");
-    }
-
-    // Class Declaration: 'class <Classname>'
-    if (state.tokens.next.identifier && state.tokens.next.value !== "extends") {
-      classNameToken = state.tokens.next;
-      identifier();
-    }
-
-    // Class Declaration: 'class <Classname> extends <Superclass>'
-    if (state.tokens.next.value === "extends") {
-      advance("extends");
-      expression(0, state.tokens.next); //?
-    }
-
-    if (state.tokens.next.value === "{") {
-      advance("{");
-    } else {
-      warning("W116", state.tokens.curr, "identifier", state.tokens.next.type); //?
-      advance();
-    }
-
-    return classNameToken;
-  }
 
   // Class statement
   blockstmt("class", function(context) {
     var className, classNameToken;
     var inexport = context & prodParams.export;
 
-    classNameToken = classHeader();
-    if (classNameToken) {
-      className = classNameToken.value;
+    if (!state.inES6()) {
+      warning("W104", state.tokens.curr, "class", "6");
     }
+    state.inClassBody = true;
 
-    if (className) {
-      this.name = className;
+    // Class Declaration: 'class <Classname>'
+    if (state.tokens.next.identifier && state.tokens.next.value !== "extends") {
+      classNameToken = state.tokens.next;
+      className = classNameToken.value;
+      identifier();
+      // unintialized, so that the 'extends' clause is parsed while the class is in TDZ
       state.funct["(scope)"].addlabel(className, {
         type: "class",
-        initialized: true,
+        initialized: false,
         token: classNameToken
       });
+    }
+
+    // Class Declaration: 'class <Classname> extends <Superclass>'
+    if (state.tokens.next.value === "extends") {
+      advance("extends");
+      expression(0, context);
+    }
+
+    if (classNameToken) {
+      this.name = className;
+      state.funct["(scope)"].initialize(className);
       if (inexport) {
         state.funct["(scope)"].setExported(className, classNameToken);
       }
     }
     state.funct["(scope)"].stack();
-
     classBody(this, context);
     return this;
   }).exps = true;
 
-  // Class expression
+  /*
+    Class expression
+
+    The Block- and Expression- handling for "class" are almost identical, except for the ordering of steps.
+    In an expression:, the name should not be saved into the calling scope, but is still accessible inside the definition, so we open a new scope first, then save the name. We also mark it as used.
+  */
   prefix("class", function(context) {
     var className, classNameToken;
 
-    classNameToken = classHeader();
-    if (classNameToken) {
+    if (!state.inES6()) {
+      warning("W104", state.tokens.curr, "class", "6");
+    }
+    state.inClassBody = true;
+
+    // Class Declaration: 'class <Classname>'
+    if (state.tokens.next.identifier && state.tokens.next.value !== "extends") {
+      classNameToken = state.tokens.next;
       className = classNameToken.value;
+      identifier();
     }
 
-    // In a class Expression: the name should not be saved into the calling scope, but is still accessible inside the definition.
-    // So we open a new scope first, then save the name.
+    // Class Declaration: 'class <Classname> extends <Superclass>'
+    if (state.tokens.next.value === "extends") {
+      advance("extends");
+      expression(0, context);
+    }
+
     state.funct["(scope)"].stack();
-    if (className) {
+    if (classNameToken) {
       this.name = className;
       state.funct["(scope)"].addlabel(className, {
         type: "class",
@@ -2768,8 +2769,12 @@ var JSHINT = (function() {
     var props = {};
     var name, accessorType, token, isStatic, inGenerator, hasConstructor;
 
-    state.inClassBody = true;
-    state.funct["(scope)"].block.add("super", "function", null, false, true);
+    if (state.tokens.next.value === "{") {
+      advance("{");
+    } else {
+      warning("W116", state.tokens.curr, "identifier", state.tokens.next.type); //?
+      advance();
+    }
 
     while (state.tokens.next.value !== "}") {
       isStatic = false;
@@ -2794,7 +2799,7 @@ var JSHINT = (function() {
             // treat like a regular method -- static methods can be called 'constructor'
             name = propertyName();
             saveProperty(props, name, token, true, isStatic);
-            doMethod(context, name, inGenerator);
+            doMethod(classToken, context, name, inGenerator);
           } else {
             if (inGenerator) {
               error("E024", token, token.value);
@@ -2803,7 +2808,7 @@ var JSHINT = (function() {
               error("E024", token, token.value);
             }
             advance();
-            doMethod(context, state.nameStack.infer());
+            doMethod(classToken, context, state.nameStack.infer());
             hasConstructor = true;
           }
           break;
@@ -2817,20 +2822,20 @@ var JSHINT = (function() {
 
           if (state.tokens.next.value === "[") {
             name = computedPropertyName(context);
-            doMethod(context, name, false);
+            doMethod(classToken, context, name, false);
           } else {
             name = propertyName();
             if (name === "prototype" || name === "constructor") {
-              error("E049", token, "class " + accessorType + "ter method", name);
+              error("E049", state.tokens.curr, "class " + accessorType + "ter method", name);
             }
             saveAccessor(accessorType, props, name, state.tokens.curr, true, isStatic);
-            doMethod(context, state.nameStack.infer(), false);
+            doMethod(classToken, context, state.nameStack.infer(), false);
           }
 
           break;
         case "[":
           name = computedPropertyName(context);
-          doMethod(context, name, inGenerator);
+          doMethod(classToken, context, name, inGenerator);
           // We don't check names (via calling saveProperty()) of computed expressions like ["Symbol.iterator"]()
           break;
         default:
@@ -2844,7 +2849,7 @@ var JSHINT = (function() {
             error("E049", token, "class method", name);
           }
           saveProperty(props, name, token, true, isStatic);
-          doMethod(context, name, inGenerator);
+          doMethod(classToken, context, name, inGenerator);
           break;
       }
     }
@@ -2852,11 +2857,10 @@ var JSHINT = (function() {
     checkProperties(props);
 
     state.inClassBody = false;
-
     state.funct["(scope)"].unstack();
   }
 
-  function doMethod(context, name, generator) {
+  function doMethod(classToken, context, name, generator) {
     if (generator) {
       if (!state.inES6()) {
         warning("W119", state.tokens.curr, "function*", "6");
@@ -2883,7 +2887,10 @@ var JSHINT = (function() {
       }
     }
 
-    doFunction(context, { name: name, type: generator ? "generator" : null });
+    doFunction(context, { name: name,
+        type: generator ? "generator" : null,
+        isMethod: true,
+        statement: classToken });
   }
 
   prefix("void").exps = true;
@@ -3303,8 +3310,7 @@ var JSHINT = (function() {
 
 
   function isMethod() {
-    return state.funct["(statement)"] && state.funct["(statement)"].type === "class" ||
-           state.funct["(context)"] && state.funct["(context)"]["(verb)"] === "class";
+    return !!state.funct["(method)"];
   }
 
   function propertyName(preserveOrToken) {
@@ -4370,7 +4376,9 @@ var JSHINT = (function() {
     var nameToken = optionalidentifier() ? state.tokens.curr : null;
 
     if (!nameToken) {
-      warning("W025");
+      if (!inexport) {
+        warning("W025");
+      }
     } else {
       state.funct["(scope)"].addlabel(nameToken.value, {
         type: generator ? "generator function" : "function",
