@@ -8,7 +8,7 @@
  *    var TestRun = require("./testhelper").setup.testRun;
  *
  *    TestRun(test, name)
- *      .addError(line, errorMessage)
+ *      .addError(line, character, errorMessage)
  *      .test(source, options);
  *
  * TestRun(test, name)
@@ -16,8 +16,9 @@
  *     name:       optional. name of the test run
  *             with a name, it's easier to identify a test run
  *
- * .addError(line, errorMessage)
- *     line:       line of the error message
+ * .addError(line, character, errorMessage)
+ *     line:       line of the reported error
+ *     character:  character of the reported error
  *     errorMessage:   the message of the reported error
  *
  * .test(source, options)
@@ -40,9 +41,31 @@ exports.setup.testRun = function (test, name) {
   var definedErrors = [];
 
   var helperObj = {
-    addError: function (line, message, extras) {
+    addError: function (line, character, message, extras) {
+      var alreadyDefined = definedErrors.some(function(err) {
+        if (err.message !== message) {
+          return false;
+        }
+
+        if (err.line !== line) {
+          return false;
+        }
+
+        if (err.character !== character) {
+          return false;
+        }
+
+        return true;
+      });
+
+      if (alreadyDefined) {
+        throw new Error("An expected error with the message '" + message +
+          "' and line number " + line +
+          " has already been defined for this test.");
+      }
       definedErrors.push({
         line: line,
+        character: character,
         message: message,
         extras: extras
       });
@@ -51,8 +74,17 @@ exports.setup.testRun = function (test, name) {
     },
 
     test: function (source, options, globals) {
+
+      Object.prototype.pollution1 = {};
+      Object.prototype.pollution2 = true;
+      Object.prototype.pollution3 = false;
+
       var ret = !!JSHINT(source, options, globals);
       var errors = JSHINT.errors;
+
+      delete Object.prototype.pollution1;
+      delete Object.prototype.pollution2;
+      delete Object.prototype.pollution3;
 
       if (errors.length === 0 && definedErrors.length === 0) {
         return;
@@ -62,6 +94,7 @@ exports.setup.testRun = function (test, name) {
       var undefinedErrors = errors.filter(function (er) {
         return !definedErrors.some(function (def) {
           var result = def.line === er.line &&
+            def.character === er.character &&
             def.message === er.reason;
 
           if (!result) {
@@ -87,24 +120,32 @@ exports.setup.testRun = function (test, name) {
       var unthrownErrors = definedErrors.filter(function (def) {
         return !errors.some(function (er) {
           return def.line === er.line &&
+            def.character === er.character &&
             def.message === er.reason;
         });
       });
 
-      // elements that only differs in line number
-      var wrongLineNumbers = undefinedErrors.map(function (er) {
-        var lines = unthrownErrors.filter(function (def) {
-          return def.line !== er.line &&
-            def.message === er.reason;
+      // elements that only differ in location
+      var wrongLocations = undefinedErrors.map(function (er) {
+        var locations = unthrownErrors.filter(function (def) {
+          if (def.message !== er.reason) {
+            return false;
+          }
+
+          return def.line !== er.line || def.character !== er.character;
         }).map(function (def) {
-          return def.line;
+          return {
+            line: def.line,
+            character: def.character
+          };
         });
 
-        if (lines.length) {
+        if (locations.length) {
           return {
             line: er.line,
+            character: er.character,
             message: er.reason,
-            definedIn: lines
+            definedIn: locations
           };
         }
         return null;
@@ -120,39 +161,52 @@ exports.setup.testRun = function (test, name) {
 
       // remove undefined errors, if there is a definition with wrong line number
       undefinedErrors = undefinedErrors.filter(function (er) {
-        return !wrongLineNumbers.some(function (def) {
+        return !wrongLocations.some(function (def) {
           return def.message === er.reason;
         });
       });
       unthrownErrors = unthrownErrors.filter(function (er) {
-        return !wrongLineNumbers.some(function (def) {
+        return !wrongLocations.some(function (def) {
           return def.message === er.message;
         });
       });
 
-      test.ok(
-        undefinedErrors.length === 0 &&
-          unthrownErrors.length === 0 &&
-          wrongLineNumbers.length === 0 &&
-          duplicateErrors.length === 0,
+      var errorDetails = "";
 
-        (name === null ? "" : "\n  TestRun: [bold]{" + name + "}") +
-        unthrownErrors.map(function (el, idx) {
-          return (idx === 0 ? "\n  [yellow]{Errors defined, but not thrown by JSHINT}\n" : "") +
-            " [bold]{Line " + el.line + ", Char " + el.character + "} " + el.message;
-        }).join("\n") +
-        undefinedErrors.map(function (el, idx) {
-          return (idx === 0 ? "\n  [yellow]{Errors thrown by JSHINT, but not defined in test run}\n" : "") +
-            "  [bold]{Line " + el.line + ", Char " + el.character + "} " + el.reason;
-        }).join("\n") +
-        wrongLineNumbers.map(function (el, idx) {
-          return (idx === 0 ? "\n  [yellow]{Errors with wrong line number}\n" : "") +
-            "  [bold]{Line " + el.line + "} " + el.message + " [red]{not in line(s)} [bold]{" + el.definedIn.join(", ") + "}";
-        }).join("\n") +
-        duplicateErrors.map(function (el, idx) {
-          return (idx === 0 ? "\n  [yellow]{Duplicated errors}\n": "") +
-            "  [bold]{Line " + el.line + ", Char " + el.character + "} " + el.reason;
-        }).join("\n") + "\n"
+      if (unthrownErrors.length > 0) {
+        errorDetails += "\n  Errors defined, but not thrown by JSHint:\n" +
+          unthrownErrors.map(function (el) {
+            return "    {Line " + el.line + ", Char " + el.character + "} " + el.message;
+          }).join("\n");
+      }
+
+      if (undefinedErrors.length > 0) {
+        errorDetails += "\n  Errors thrown by JSHint, but not defined in test run:\n" +
+          undefinedErrors.map(function (el) {
+            return "    {Line " + el.line + ", Char " + el.character + "} " + el.reason;
+          }).join("\n");
+      }
+
+      if (wrongLocations.length > 0) {
+        errorDetails += "\n  Errors with wrong location:\n" +
+          wrongLocations.map(function (el) {
+            var locations = el.definedIn.map(function(location) {
+              return "{Line " + location.line + ", Char " + location.character + "}";
+            });
+            return "    {Line " + el.line + ", Char " + el.character + "} " + el.message + " - Not in line(s) " + locations.join(", ");
+          }).join("\n");
+      }
+
+      if (duplicateErrors.length > 0) {
+        errorDetails += "\n  Duplicated errors:\n" +
+          duplicateErrors.map(function (el) {
+            return "    {Line " + el.line + ", Char " + el.character + "} " + el.reason;
+          }).join("\n");
+      }
+
+      test.ok(
+        errorDetails === "",
+        (name ? "\n  TestRun: '" + name + "'" : "") + errorDetails
       );
     }
   };

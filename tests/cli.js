@@ -658,6 +658,30 @@ exports.group = {
     test.done();
   },
 
+  // See gh-3187
+  testIgnoreWithDot: function (test) {
+    var dir = __dirname + "/../examples/";
+    this.sinon.stub(process, "cwd").returns(dir);
+
+    this.sinon.stub(shjs, "cat")
+      .withArgs(sinon.match(/file\.js$/)).returns("This is not Javascript.")
+      .withArgs(sinon.match(/\.jshintignore$/)).returns("**/ignored-dir/**");
+    this.sinon.stub(shjs, "test")
+      .withArgs("-e", sinon.match(/file\.js$/)).returns(true)
+      .withArgs("-e", sinon.match(/\.jshintignore$/)).returns(true);
+
+    cli.interpret([
+      "node", "jshint", "ignored-dir/.dot-prefixed/file.js",
+      "ignored-dir/not-dot-prefixed/file.js"
+    ]);
+
+    process.cwd.returns(__dirname + "/../");
+
+    test.equal(cli.exit.args[0][0], 0, "All matching files are ignored, regardless of dot-prefixed directories.");
+
+    test.done();
+  },
+
   testExcludePath: function (test) {
     var run = this.sinon.stub(cli, "run");
     var dir = __dirname + "/../examples/";
@@ -1262,6 +1286,42 @@ exports.useStdin = {
 
     test.equal(errors.length, 1, "should be a single error.");
     test.equal(cli.exit.args[0][0], 2, "status code should be 2 when there is a linting error.");
+
+    test.done();
+  },
+
+  testNoFilename: function(test) {
+    var rep = require("../examples/reporter.js");
+    var errors = [];
+    this.sinon.stub(rep, "reporter", function (res) {
+      errors = errors.concat(res);
+    });
+
+    var dir = __dirname + "/../examples/";
+    this.sinon.stub(process, "cwd").returns(dir);
+
+    cli.interpret([
+      "node", "jshint", "--reporter=reporter.js", "-"
+    ]);
+
+    this.stdin.send("void 0;");
+    this.stdin.end();
+
+    test.equal(errors.length, 0, "should not report errors");
+    test.equal(cli.exit.args[0][0], 0, "status code should be 2 when there is a linting error.");
+
+    errors.length = 0;
+    this.stdin.reset();
+
+    cli.interpret([
+      "node", "jshint", "--reporter=reporter.js", "-"
+    ]);
+
+    this.stdin.send("? This is not JavaScript.");
+    this.stdin.end();
+
+    test.ok(errors.length > 0, "should report some number of errors");
+    test.equal(cli.exit.args[1][0], 2, "status code should be 2 when there is a linting error.");
 
     test.done();
   },

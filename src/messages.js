@@ -77,7 +77,10 @@ var errors = {
   E059: "Incompatible values for the '{a}' and '{b}' linting options.",
   E060: "Non-callable values cannot be used as the second operand to instanceof.",
   E061: "Invalid position for 'yield' expression (consider wrapping in parenthesis).",
-  E062: "Functions defined outside of strict mode with non-simple parameter lists may not " +
+  E062: "Rest parameter does not a support default value.",
+  E063: "Super property may only be used within method bodies.",
+  E064: "Super call may only be used within class method bodies.",
+  E065: "Functions defined outside of strict mode with non-simple parameter lists may not " +
     "enable strict mode."
 };
 
@@ -102,10 +105,10 @@ var warnings = {
   W018: "Confusing use of '{a}'.",
   W019: "Use the isNaN function to compare with NaN.",
   W020: "Read only.",
-  W021: "Reassignment of '{a}', which is is a {b}. " +
+  W021: "Reassignment of '{a}', which is a {b}. " +
     "Use 'var' or 'let' to declare bindings that may change.",
   W022: "Do not assign to the exception parameter.",
-  W023: "Expected an identifier in an assignment and instead saw a function invocation.",
+  W023: null,
   W024: "Expected an identifier and instead saw '{a}' (a reserved word).",
   W025: "Missing name in function declaration.",
   W026: "Inner functions should be listed at the top of the outer function.",
@@ -169,7 +172,8 @@ var warnings = {
   W082: "Function declarations should not be placed in blocks. " +
     "Use a function expression or move the statement to the top of " +
     "the outer function.",
-  W083: "Don't make functions within a loop.",
+  W083: "Functions declared within loops referencing an outer scoped " +
+    "variable may lead to confusing semantics. ({a})",
   W084: "Expected a conditional expression and instead saw an assignment.",
   W085: "Don't use 'with'.",
   W086: "Expected a 'break' statement before '{a}'.",
@@ -186,7 +190,7 @@ var warnings = {
   W097: "Use the function form of \"use strict\".",
   W098: "'{a}' is defined but never used.",
   W099: null,
-  W100: "This character may get silently deleted by one or more browsers.",
+  W100: null,
   W101: "Line is too long.",
   W102: null,
   W103: "The '{a}' property is deprecated.",
@@ -223,12 +227,16 @@ var warnings = {
   W134: "The '{a}' option is only available when linting ECMAScript {b} code.",
   W135: "{a} may not be supported by non-browser environments.",
   W136: "'{a}' must be in function scope.",
-  W137: "Empty destructuring.",
+  W137: "Empty destructuring: this is unnecessary and can be removed.",
   W138: "Regular parameters should not come after default parameters.",
   W139: "Function expressions should not be used as the second operand to instanceof.",
   W140: "Missing comma.",
-  W141: "'{a}' is a non-standard language feature. Enable it using the '{b}' unstable option.",
-  W142: "Superfluous 'case' clause."
+  W141: "Empty {a}: this is unnecessary and can be removed.",
+  W142: "Empty {a}: consider replacing with `import '{b}';`.",
+  W143: "Assignment to properties of a mapped arguments object may cause " +
+    "unexpected changes to formal parameters.",
+  W144: "'{a}' is a non-standard language feature. Enable it using the '{b}' unstable option.",
+  W145: "Superfluous 'case' clause."
 };
 
 var info = {
